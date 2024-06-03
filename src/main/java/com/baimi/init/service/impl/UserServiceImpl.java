@@ -30,9 +30,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (user.getRoles().equals("manager")||user.getRoles().equals("employee")) {
             Employee employee = employeeService.selectByUserId(user.getId());
             Asserts.notNull(employee, "身份认证有误");
-            userInfo.setShop(employee.getShopId());
+            StpUtil.getSession().set("shop", employee.getShopId());
         }
-        StpUtil.getSession().set(userInfo.getPhone(), userInfo);
+        StpUtil.getSession().set("role", user.getRoles());
+        StpUtil.getSession().set("user", userInfo);
         // 第2步，获取 Token 相关参数
         return StpUtil.getTokenInfo().tokenValue;
     }

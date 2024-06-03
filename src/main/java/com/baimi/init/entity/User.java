@@ -1,10 +1,13 @@
 package com.baimi.init.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -17,6 +20,8 @@ import java.io.Serializable;
  * @since 2024-05-30
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "User对象", description = "")
 public class User implements Serializable {
 
@@ -30,6 +35,7 @@ public class User implements Serializable {
     private String account;
 
     @ApiModelProperty("用户昵称，最多8位")
+    @TableField(value = "username")
     private String userName;
 
     @ApiModelProperty("密码建议10位，最少6位")

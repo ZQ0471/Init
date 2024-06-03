@@ -27,11 +27,9 @@ public class UserController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-//    @SaCheckLogin
     @GetMapping("/userInfo")
     public Result  hello() {
-        String phone = StpUtil.getLoginIdAsString();
-        return Result.ok().data("user",StpUtil.getSession().get(phone));
+        return Result.ok().data("user",StpUtil.getSession().get("user"));
     }
 
     @GetMapping("/test")

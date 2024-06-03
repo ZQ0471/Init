@@ -54,8 +54,10 @@ sa-token:
   #is-log: true
 aliyun:
   sms:
-    sms-access-key-id:
-    sms-access-key-secret:
-    sms-sign-nam:  #签名名称
-    sms-template-cod: #短信模板信息
+    sms-access-key-id: 1111111111
+    sms-access-key-secret: 11651654
+    #签名名称
+    sms-sign-nam: 46854165
+    #短信模板信息
+    sms-template-cod: 418651265
     sms-endpoint: dysmsapi.aliyuncs.com

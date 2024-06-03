@@ -22,14 +22,15 @@ public class StpInterfaceImpl implements StpInterface {
         // 本 list 仅做模拟，实际项目中要根据具体业务逻辑来查询权限
         //例如店员权限设置：1.店铺id 2.订单备注 3.菜单查询
         List<String> list = new ArrayList<>();
-        UserInfo userInfo = (UserInfo) StpUtil.getSession().get((String) loginId);
-        switch (userInfo.getRoles()) {
+        String role = (String) StpUtil.getSession().get("role");
+        switch (role) {
             case "admin":
                 list.add("order.*");
                 list.add("employee.*");
+                list.add("shop.*");
                 break;
             case "manager":
-                list.add("shop:" + userInfo.getShop());
+                list.add("shop:" + StpUtil.getSession().get("shop"));
                 list.add("order.add");
                 list.add("order.update");
                 list.add("order.list");
@@ -37,7 +38,8 @@ public class StpInterfaceImpl implements StpInterface {
                 list.add("shop.*");
                 break;
             case "employee":
-                list.add("shop:" + userInfo.getShop());
+                list.add("shop:" + StpUtil.getSession().get("shop"));
+                list.add("shop.list");
                 list.add("order.add");
                 list.add("order.update");
                 list.add("order.list");
@@ -56,11 +58,11 @@ public class StpInterfaceImpl implements StpInterface {
      */
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        UserInfo userInfo = (UserInfo) StpUtil.getSession().get((String) loginId);
+        String role = (String) StpUtil.getSession().get("role");
         // 本 list 仅做模拟，实际项目中要根据具体业务逻辑来查询角色
         // 设置角色为 超级管理员 员工 用户
         List<String> list = new ArrayList<>();
-        list.add(userInfo.getRoles());
+        list.add(role);
         return list;
     }
 

@@ -87,6 +87,13 @@
             <artifactId>sa-token-spring-boot-starter</artifactId>
             <version>1.38.0</version>
         </dependency>
+        <!-- Sa-Token 整合 Redis （使用 jackson 序列化方式） -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-redis-jackson</artifactId>
+            <version>1.38.0</version>
+        </dependency>
+
         <!--  阿里云短信依赖  -->
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -109,11 +116,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- 如果使用Lettuce作为Redis客户端，需要添加此依赖 -->
-        <dependency>
-            <groupId>io.lettuce</groupId>
-            <artifactId>lettuce-core</artifactId>
-        </dependency>
+<!--        &lt;!&ndash; 如果使用Lettuce作为Redis客户端，需要添加此依赖 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.lettuce</groupId>-->
+<!--            <artifactId>lettuce-core</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -126,7 +133,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>

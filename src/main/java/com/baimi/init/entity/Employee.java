@@ -43,11 +43,6 @@ public class Employee implements Serializable {
     private Integer userId;
 
     /**
-     * 身份 1 普通店员 2 店长
-     */
-    private Byte identity;
-
-    /**
      * 授权状态 1 已授权 2 已禁用
      */
     private Byte status;
