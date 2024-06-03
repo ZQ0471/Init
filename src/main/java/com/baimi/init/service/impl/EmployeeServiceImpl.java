@@ -3,8 +3,8 @@ package com.baimi.init.service.impl;
 import com.baimi.init.entity.Employee;
 import com.baimi.init.mapper.EmployeeMapper;
 import com.baimi.init.service.IEmployeeService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,4 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> implements IEmployeeService {
 
+    @Override
+    public Employee selectByUserId(Integer userId) {
+        LambdaQueryWrapper<Employee> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Employee::getUserId, userId);
+        return this.baseMapper.selectOne(wrapper);
+    }
 }

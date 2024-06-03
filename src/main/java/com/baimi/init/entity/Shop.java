@@ -54,10 +54,7 @@ public class Shop implements Serializable {
     @ApiModelProperty("是否已删除(0:未删除  1:已删除)")
     private Byte isDeleted;
 
-    @ApiModelProperty("收发中心id---wd_receiving_and_sending_center.id")
-    private Integer rscId;
-
-    @ApiModelProperty("干洗中心id---wd_dry_cleaning_center.id")
-    private Integer dccId;
+    @ApiModelProperty("店铺类型(1：普通店铺 2：收发中心 3：干洗中心)")
+    private Integer cate;
 
 }

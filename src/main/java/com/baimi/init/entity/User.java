@@ -29,6 +29,9 @@ public class User implements Serializable {
     @ApiModelProperty("账户限定长度8位")
     private String account;
 
+    @ApiModelProperty("用户昵称，最多8位")
+    private String userName;
+
     @ApiModelProperty("密码建议10位，最少6位")
     private String password;
 

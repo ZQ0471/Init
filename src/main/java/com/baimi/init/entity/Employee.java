@@ -33,9 +33,9 @@ public class Employee implements Serializable {
     private LocalDateTime modifyTime;
 
     /**
-     * 收发中心id/干洗中心id
+     * 所属店铺
      */
-    private Integer centerId;
+    private Integer shopId;
 
     /**
      * 用户id---wd_user.id
@@ -43,17 +43,7 @@ public class Employee implements Serializable {
     private Integer userId;
 
     /**
-     * 员工名称
-     */
-    private String name;
-
-    /**
-     * 手机号
-     */
-    private String phone;
-
-    /**
-     * 身份 1 收发中心员工 2 干洗中心员工
+     * 身份 1 普通店员 2 店长
      */
     private Byte identity;
 

@@ -1,6 +1,8 @@
 package com.baimi.init.common.stp;
 
 import cn.dev33.satoken.stp.StpInterface;
+import cn.dev33.satoken.stp.StpUtil;
+import com.baimi.init.dto.UserInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,27 +21,46 @@ public class StpInterfaceImpl implements StpInterface {
     public List<String> getPermissionList(Object loginId, String loginType) {
         // 本 list 仅做模拟，实际项目中要根据具体业务逻辑来查询权限
         //例如店员权限设置：1.店铺id 2.订单备注 3.菜单查询
-        //通过查询店员表实现
-        List<String> list = new ArrayList<String>();
-        list.add("101");
-        list.add("user.add");
-        list.add("user.update");
-        list.add("user.get");
-        // list.add("user.delete");
-        list.add("art.*");
+        List<String> list = new ArrayList<>();
+        UserInfo userInfo = (UserInfo) StpUtil.getSession().get((String) loginId);
+        switch (userInfo.getRoles()) {
+            case "admin":
+                list.add("order.*");
+                list.add("employee.*");
+                break;
+            case "manager":
+                list.add("shop:" + userInfo.getShop());
+                list.add("order.add");
+                list.add("order.update");
+                list.add("order.list");
+                list.add("employee.*");
+                list.add("shop.*");
+                break;
+            case "employee":
+                list.add("shop:" + userInfo.getShop());
+                list.add("order.add");
+                list.add("order.update");
+                list.add("order.list");
+                list.add("employee.list");
+                break;
+            default:
+                list.add("order.complete");
+                list.add("order.refund");
+                list.add("order.cancel");
+                break;
+        }
         return list;
     }
-
     /**
      * 返回一个账号所拥有的角色标识集合 (权限与角色可分开校验)
      */
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
+        UserInfo userInfo = (UserInfo) StpUtil.getSession().get((String) loginId);
         // 本 list 仅做模拟，实际项目中要根据具体业务逻辑来查询角色
-        // 设置角色为 1.超级管理员 2.店员 2.用户
-        List<String> list = new ArrayList<String>();
-        list.add("admin");
-        list.add("super-admin");
+        // 设置角色为 超级管理员 员工 用户
+        List<String> list = new ArrayList<>();
+        list.add(userInfo.getRoles());
         return list;
     }
 
