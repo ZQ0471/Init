@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionHandlerAdvice {
     @ExceptionHandler(Exception.class)
     public Result handleException(Exception e) {
-//        log.error(e.getClass().getName(), e);
+        log.error(e.getClass().getName(), e);
         return Result.error().message(e.getMessage());
     }
 

@@ -3,7 +3,7 @@ package com.baimi.init.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baimi.init.entity.User;
 import com.baimi.init.result.Result;
-import com.example.demo.service.IUserService;
+import com.baimi.init.service.IUserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

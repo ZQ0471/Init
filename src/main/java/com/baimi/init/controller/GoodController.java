@@ -1,6 +1,6 @@
 package com.baimi.init.controller;
 
-import com.example.demo.service.IGoodService;
+import com.baimi.init.service.IGoodService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

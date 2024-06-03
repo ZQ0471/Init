@@ -1,6 +1,6 @@
 package com.baimi.init.controller;
 
-import com.example.demo.service.IOrderService;
+import com.baimi.init.service.IOrderService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.baimi.init.service;
 
 import com.baimi.init.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;

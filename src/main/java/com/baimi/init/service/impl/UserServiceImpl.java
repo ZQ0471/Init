@@ -4,10 +4,10 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.common.Asserts;
 import com.baimi.init.entity.User;
 import com.baimi.init.mapper.UserMapper;
+import com.baimi.init.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.example.demo.service.IUserService;
 import org.springframework.stereotype.Service;
 
 @Service
