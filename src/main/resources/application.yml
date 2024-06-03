@@ -1,12 +1,6 @@
 server:
   port: 8080
 spring:
-  devtools:
-    restart:
-      enabled: true  #设置开启热部署
-      additional-paths: src/main/java #重启目录
-    freemarker:
-      cache: false    #页面不加载缓存，修改即时生效
   # redis配置
   redis:
     # Redis数据库索引（默认为0）
@@ -29,6 +23,12 @@ spring:
         max-idle: 10
         # 连接池中的最小空闲连接
         min-idle: 0
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+#    freemarker:
+#      cache: false    #页面不加载缓存，修改即时生效
   # mysql
   datasource:
     username: root
@@ -52,3 +52,10 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: true
+aliyun:
+  sms:
+    sms-access-key-id:
+    sms-access-key-secret:
+    sms-sign-nam:  #签名名称
+    sms-template-cod: #短信模板信息
+    sms-endpoint: dysmsapi.aliyuncs.com
