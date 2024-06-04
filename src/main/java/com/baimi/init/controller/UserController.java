@@ -1,7 +1,10 @@
 package com.baimi.init.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.entity.User;
+import com.baimi.init.query.UserQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +44,10 @@ public class UserController {
     public Result login(@RequestBody User loginUser) {
         String token = userService.login(loginUser);
         return Result.ok().data("token", token);
+    }
+    @SaCheckRole("admin")
+    @GetMapping("/list")
+    public Result list(UserQuery userQuery) {
+        return Result.ok().data("list", userService.getUserList(userQuery));
     }
 }

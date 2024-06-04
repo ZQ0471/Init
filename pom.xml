@@ -18,7 +18,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <!--devtools热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,16 +25,6 @@
             <optional>true</optional>
             <scope>true</scope>
         </dependency>
-<!--        &lt;!&ndash;redis使用&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--        </dependency>-->
-        <!-- Spring Cache -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-cache</artifactId>-->
-<!--        </dependency>-->
         <!--注解相关-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -116,11 +105,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-<!--        &lt;!&ndash; 如果使用Lettuce作为Redis客户端，需要添加此依赖 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.lettuce</groupId>-->
-<!--            <artifactId>lettuce-core</artifactId>-->
-<!--        </dependency>-->
+        <!--限流熔断Sentinel-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
