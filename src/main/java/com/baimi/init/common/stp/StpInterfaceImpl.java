@@ -2,7 +2,6 @@ package com.baimi.init.common.stp;
 
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
-import com.baimi.init.dto.UserInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -59,8 +58,6 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
         String role = (String) StpUtil.getSession().get("role");
-        // 本 list 仅做模拟，实际项目中要根据具体业务逻辑来查询角色
-        // 设置角色为 超级管理员 员工 用户
         List<String> list = new ArrayList<>();
         list.add(role);
         return list;
