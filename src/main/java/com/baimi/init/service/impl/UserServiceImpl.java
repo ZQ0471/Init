@@ -37,8 +37,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             Asserts.notNull(employee, "身份认证有误");
             StpUtil.getSession().set("shop", employee.getShopId());
         }
+        //Session的存储是每个登录用户一个Session
+        //使用登录Id也就是手机号作为键，创建在redis
+        //dataMap使用ConcurrentHashMap
         StpUtil.getSession().set("role", user.getRoles());
         StpUtil.getSession().set("user", userInfo);
+        //关于token存储，使用redis存储token，token作为键，值为登录Id
         // 第2步，获取 Token 相关参数
         return StpUtil.getTokenInfo().tokenValue;
     }
