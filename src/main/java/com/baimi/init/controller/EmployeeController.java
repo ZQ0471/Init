@@ -1,5 +1,6 @@
 package com.baimi.init.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IEmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import javax.annotation.Resource;
 public class EmployeeController {
     @Resource
     private IEmployeeService employeeService;
+    @SaCheckRole("admin")
     @GetMapping("/list")
     public Result list() {
         return Result.ok().data("list",employeeService.list());

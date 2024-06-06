@@ -1,6 +1,5 @@
 package com.baimi.init.controller;
 
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.entity.User;
@@ -12,6 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -27,17 +27,15 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
 
     @GetMapping("/userInfo")
-    public Result  hello() {
+    public Result hello() {
         return Result.ok().data("user",StpUtil.getSession().get("user"));
     }
 
     @GetMapping("/test")
-    public String test() {
-        return (String) redisTemplate.opsForValue().get("user");
+    public Result test() {
+        return Result.ok().data("time", LocalDateTime.now().plusHours(1));
     }
 
     @PostMapping("/login")
