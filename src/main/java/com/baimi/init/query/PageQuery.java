@@ -1,6 +1,5 @@
 package com.baimi.init.query;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

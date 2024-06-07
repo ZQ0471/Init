@@ -22,32 +22,24 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "User对象", description = "")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("账户限定长度8位")
     private String account;
 
-    @ApiModelProperty("用户昵称，最多8位")
     @TableField(value = "username")
     private String userName;
 
-    @ApiModelProperty("密码建议10位，最少6位")
     private String password;
 
-    @ApiModelProperty("权限")
     private String roles;
 
-    @ApiModelProperty("头像 暂定链接，七牛云上传")
     private String avatar;
 
-    @ApiModelProperty("电话号码")
     private String phone;
 
 }

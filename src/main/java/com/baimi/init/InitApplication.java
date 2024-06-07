@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @MapperScan("com.baimi.init.mapper")
-@EnableSwagger2
-//@EnableCaching
 @SpringBootApplication
 public class InitApplication {
 

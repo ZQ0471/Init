@@ -1,6 +1,5 @@
 package com.baimi.init.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;

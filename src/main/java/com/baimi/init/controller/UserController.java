@@ -6,8 +6,6 @@ import com.baimi.init.entity.User;
 import com.baimi.init.query.UserQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

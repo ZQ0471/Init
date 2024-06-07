@@ -19,8 +19,6 @@ public class LoginAspect {
     @Pointcut("@annotation(com.baimi.init.common.annotation.LogAnnotation)")
     private void LoginPointCut() {
     }
-
-
     @Around("LoginPointCut()")
     public Object LoginAround(ProceedingJoinPoint joinPoint) throws Throwable {
         Signature signature = joinPoint.getSignature();
