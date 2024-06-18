@@ -31,16 +31,11 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8090
-#    freemarker:
-#      cache: false    #页面不加载缓存，修改即时生效
   # mysql
   datasource:
     username: root
     password: 123456
     url: jdbc:mysql:///demo
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 sa-token:
   # token 名称（同时也是 cookie 名称）
   token-name: satoken
@@ -55,7 +50,7 @@ sa-token:
   # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
   token-style: uuid
   # 是否输出操作日志
-  is-log: true
+  is-log: false
 aliyun:
   sms:
     sms-access-key-id: 1111111111
@@ -65,3 +60,11 @@ aliyun:
     #短信模板信息
     sms-template-cod: 418651265
     sms-endpoint: dysmsapi.aliyuncs.com
+logging:
+  level:
+    root: WARN
+    org.springframework.web: WARN
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

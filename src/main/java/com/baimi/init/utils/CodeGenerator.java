@@ -12,9 +12,7 @@ public class CodeGenerator {
     public static void main(String[] args) {
         FastAutoGenerator.create("jdbc:mysql:///demo", "root", "123456")
                 .globalConfig(builder -> {
-                    builder.author("zhang") // 设置作者
-                            //.enableSwagger() // 开启 swagger 模式
-                            .outputDir("E:\\code\\demo\\src\\main\\resources"); // 指定输出目录
+                    builder.author("zhangqi").outputDir("E:\\code\\demo\\src\\main\\resources"); // 指定输出目录
                 })
                 .dataSourceConfig(builder ->
                         builder.typeConvertHandler((globalConfig, typeRegistry, metaInfo) -> {

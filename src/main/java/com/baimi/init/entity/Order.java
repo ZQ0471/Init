@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
  * @since 2024-05-30
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;

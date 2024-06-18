@@ -18,6 +18,6 @@ public class UserInfo {
         this.account = user.getAccount();
         this.phone = user.getPhone();
         this.avatar = user.getAvatar();
-        this.username = user.getUserName();
+        this.username = user.getUsername();
     }
 }

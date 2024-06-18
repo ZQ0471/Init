@@ -7,12 +7,14 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
 @Component
+@Slf4j
 public class AliyunSmsUtil {
     @Value("${aliyun.sms.sms-access-key-id}")
     private String accessKeyId;
@@ -45,7 +47,7 @@ public class AliyunSmsUtil {
 
             return "OK".equals(response.getCode());
         } catch (ClientException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(),e);
             return false;
         }
     }
