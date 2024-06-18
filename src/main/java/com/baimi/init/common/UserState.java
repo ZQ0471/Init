@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @ClassName UserState
- * @Author zhang
- * @DATE 2024/6/18 下午5:03
+ * ClassName UserState
+ * Author zhang
+ * DATE 2024/6/18 下午5:03
  */
 @Component
 public class UserState {
