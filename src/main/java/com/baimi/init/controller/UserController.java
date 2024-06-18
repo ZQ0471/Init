@@ -1,5 +1,6 @@
 package com.baimi.init.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.entity.User;
@@ -27,8 +28,8 @@ public class UserController {
     private IUserService userService;
 
     /**
-     * @Date 上午10:54 2024/6/17
-     * @Param [user, userQuery]
+     * Date 上午10:54 2024/6/17
+     * Param [user, userQuery]
      * @return com.baimi.init.result.Result
      **/
 
@@ -39,8 +40,8 @@ public class UserController {
     }
 
     /**
-     * @Date 上午10:55 2024/6/17
-     * @Param []
+     * Date 上午10:55 2024/6/17
+     * Param []
      * @return com.baimi.init.result.Result
      **/
     @GetMapping("/userInfo")
@@ -48,15 +49,17 @@ public class UserController {
         return Result.ok().data("user",StpUtil.getSession().get("user"));
     }
 
+    @SaCheckRole("admin")
     @GetMapping("/test")
     public Result test() {
-        log.error("真的执行力");
-        return Result.ok().data("seconds", "seconds");
+        return Result.ok().data("roles", StpUtil.getSession().get("roles"))
+                .data("permissions", StpUtil.getSession().get("permissions"));
     }
 
-    @PutMapping("/code")
-    public void voidTest() {
-//        log.error("真的执行力");
+    @SaCheckPermission("role.add")
+    @GetMapping("/code")
+    public Result voidTest() {
+        return Result.ok().data("roles", StpUtil.getSession().get("roles"));
     }
 
     @PostMapping("/login")
@@ -64,9 +67,7 @@ public class UserController {
         String token = userService.login(loginUser);
         return Result.ok().data("token", token);
     }
-    @SaCheckRole("admin")
-    @GetMapping("/list")
-    public Result list(UserQuery userQuery, User user) {
+    public Result list(UserQuery userQuery) {
         return Result.ok().data("list", userService.getUserList(userQuery));
     }
 }

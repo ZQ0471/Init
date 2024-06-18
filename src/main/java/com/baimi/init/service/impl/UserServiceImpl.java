@@ -6,22 +6,18 @@ import com.baimi.init.dto.UserInfo;
 import com.baimi.init.entity.User;
 import com.baimi.init.mapper.UserMapper;
 import com.baimi.init.query.UserQuery;
-import com.baimi.init.service.IEmployeeService;
 import com.baimi.init.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-    @Resource
-    private IEmployeeService employeeService;
     @Override
     public String login(User loginUser) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
@@ -50,5 +46,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             list.add(userInfo);
         });
         return list;
+    }
+
+    @Override
+    public Integer getUserIdByPhone(String phone) {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getPhone,phone);
+        User user = this.baseMapper.selectOne(wrapper);
+        if(user==null) return -1;
+        return user.getId();
     }
 }

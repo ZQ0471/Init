@@ -20,4 +20,6 @@ public interface IUserService extends IService<User> {
     String login(User loginUser);
 
     List<UserInfo> getUserList(UserQuery userQuery);
+
+    Integer getUserIdByPhone(String phone);
 }
