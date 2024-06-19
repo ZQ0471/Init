@@ -14,14 +14,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @ClassName UserRoleServiceImpl
- * @Author zhang
- * @DATE 2024/6/18 下午3:45
+ * className UserRoleServiceImpl
+ * @author zhang
+ * @since 2024/6/18 下午3:45
  */
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
     @Resource
     private IRoleService roleService;
+    /**
+     * 根据用户id获取角色列表
+     * @since  2024/6/19
+     * @param userId 用户id
+     * @return java.util.List<com.baimi.init.entity.Role>
+     **/
     @Override
     public List<Role> getRoleListByUserId(Integer userId) {
         LambdaQueryWrapper<UserRole> wrapper = new LambdaQueryWrapper<>();

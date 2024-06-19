@@ -16,9 +16,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @ClassName RolePermissionServiceImpl
- * @Author zhang
- * @DATE 2024/6/18 下午3:44
+ * className RolePermissionServiceImpl
+ * @author zhang
+ * @since  2024/6/18 下午3:44
  */
 @Service
 public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper, RolePermission> implements IRolePermissionService {

@@ -18,6 +18,12 @@ import java.util.List;
 public class PermissionController {
     @Resource
     private IPermissionService permissionService;
+    /**
+     * 获取权限列表
+     * @since  2024/6/19
+     * @param pageQuery 分页数据
+     * @return com.baimi.init.result.Result
+     **/
     @GetMapping("/list")
     public Result getPermissionList(PageQuery pageQuery){
         List<PermissionVO> list = permissionService.getPermissionList(pageQuery);

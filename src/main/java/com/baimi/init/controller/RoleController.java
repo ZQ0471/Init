@@ -18,11 +18,24 @@ public class RoleController {
     @Resource
     private IRoleService roleService;
 
+    /**
+     * 获取角色列表
+     * @since  2024/6/19
+     * @param pageQuery 分页数据
+     * @return com.baimi.init.result.Result
+     **/
     @GetMapping("/list")
     public Result getRoleList(PageQuery pageQuery) {
         List<RoleVO> list = roleService.getRoleList(pageQuery);
         return Result.ok().data("list", list).data("total", list.size());
     }
+
+    /**
+     * 新增角色
+     * date   2024/6/19
+     * @param role 角色
+     * @return Result
+     **/
     @PostMapping("/add")
     public Result addRole(@RequestBody Role role) {
         if(roleService.addRole(role)) return Result.ok().message("新增角色成功！");

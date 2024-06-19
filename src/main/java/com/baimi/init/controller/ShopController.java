@@ -24,6 +24,12 @@ public class ShopController {
     @Resource
     private IShopService shopService;
 
+    /**
+     * @since  2024/6/19
+     * @param shop 店铺信息
+     * @return com.baimi.init.result.Result
+     **/
+
     @SaCheckPermission("shop.add")
     @PostMapping("/addShop")
     public Result addShop(@RequestBody Shop shop) {
@@ -33,6 +39,12 @@ public class ShopController {
         }
         return Result.error().message("新增店铺失败");
     }
+    /**
+     * 查询店铺列表
+     * @since  2024/6/19
+     * @return com.baimi.init.result.Result
+     **/
+
     @SaCheckPermission("shop.list")
     @GetMapping("/list")
     public Result list() {

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * ClassName UserRoleController
- * Author zhang
- * DATE 2024/6/18 下午3:46
+ * className UserRoleController
+ * @author zhang
+ * @since 2024/6/18 下午3:46
  */
 @Slf4j
 @RestController
