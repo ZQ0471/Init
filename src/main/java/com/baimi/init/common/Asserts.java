@@ -19,6 +19,11 @@ public class Asserts {
         }
     }
 
+    /**
+     * Date 上午9:25 2024/6/19
+     * Param [object, message]
+     **/
+
     public static void notNull(Object object, String message) {
         if (object == null) {
             throw new BadRequestException(message);

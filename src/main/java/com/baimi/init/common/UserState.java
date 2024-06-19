@@ -27,7 +27,7 @@ public class UserState {
     private IUserService userService;
     /**
      * 更新用户权限状态
-     * 最好每次操作权限或角色都更新一次
+     * 最好每次操作权限或角色都删除一下session
      */
     public void refreshUserStatement(){
         //更新用户角色信息

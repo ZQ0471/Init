@@ -28,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         UserInfo userInfo = new UserInfo(user);
         //Session的存储是每个登录用户一个Session
         //使用登录Id也就是手机号作为键，创建在redis
-        //dataMap使用ConcurrentHashMap
+        //dataMap使用ConcurrentHashMap 所以线程安全
         StpUtil.getSession().set("user", userInfo);
         return StpUtil.getTokenInfo().tokenValue;
     }
@@ -37,7 +37,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public List<UserInfo> getUserList(UserQuery userQuery) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         if(userQuery.getName()!=null) wrapper.like(User::getUsername,userQuery.getName());
-        Asserts.isTrue(userQuery.getPageNo()!=null&&userQuery.getPageSize()!=null,"查询条件有误！");
+        Asserts.isTrue(userQuery.getPageNo()!=null&&userQuery.getPageSize()!=null,"请输入分页参数！");
         Page<User> page = new Page<>(userQuery.getPageNo(),userQuery.getPageSize());
         this.baseMapper.selectPage(page,wrapper);
         List<UserInfo> list = new ArrayList<>();

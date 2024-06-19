@@ -1,17 +1,31 @@
 package com.baimi.init.service.impl;
 
+import com.baimi.init.common.Asserts;
 import com.baimi.init.entity.Permission;
 import com.baimi.init.mapper.PermissionMapper;
+import com.baimi.init.query.PageQuery;
 import com.baimi.init.service.IPermissionService;
+import com.baimi.init.vo.PermissionVO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
- * @ClassName PermissionServiceImpl
- * @Author zhang
- * @DATE 2024/6/18 下午3:36
+ * ClassName PermissionServiceImpl
+ * Author zhangqi
+ * DATE 2024/6/18 下午3:36
  */
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 
+    @Override
+    public List<PermissionVO> getPermissionList(PageQuery pageQuery) {
+        Asserts.isTrue(pageQuery.getPageNo()!=null&&pageQuery.getPageSize()!=null,"请输入分页参数！");
+        Page<Permission> page = new Page<>(pageQuery.getPageNo(), pageQuery.getPageSize());
+        List<Permission> permissionList = this.page(page).getRecords();
+        return permissionList.stream().map(PermissionVO::new).collect(Collectors.toList());
+    }
 }
