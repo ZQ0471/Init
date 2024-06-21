@@ -8,6 +8,7 @@ import com.baimi.init.query.UserQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,6 +27,8 @@ import javax.annotation.Resource;
 public class UserController {
     @Resource
     private IUserService userService;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     /**
      * Date 上午10:54 2024/6/17
@@ -46,12 +49,14 @@ public class UserController {
      **/
     @GetMapping("/userInfo")
     public Result hello() {
-        return Result.ok().data("user",StpUtil.getSession().get("user"));
+       Object o  = redisTemplate.opsForValue().get("test");
+        return Result.ok().data("user",StpUtil.getSession().get("user")).data("test",o);
     }
 
     @SaCheckRole("admin")
     @GetMapping("/test")
     public Result test() {
+        redisTemplate.opsForValue().set("test","just test");
         return Result.ok().data("roles", StpUtil.getSession().get("roles"))
                 .data("permissions", StpUtil.getSession().get("permissions"));
     }
