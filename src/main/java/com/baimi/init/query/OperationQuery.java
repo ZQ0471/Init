@@ -10,5 +10,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class OperationQuery extends PageQuery {
-    private Integer type;
+    private String type;
 }

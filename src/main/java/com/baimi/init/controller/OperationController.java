@@ -28,7 +28,6 @@ public class OperationController {
     @GetMapping("/list")
     public Result list(OperationQuery query) {
         List<OperationVO> list = operationService.getOperationList(query);
-
         return Result.ok().data("list", list).data("total", list.size());
     }
 

@@ -25,13 +25,11 @@ import java.util.List;
 public class ShopController {
     @Resource
     private IShopService shopService;
-
     /**
      * @since  2024/6/19
      * @param shop 店铺信息
      * @return com.baimi.init.result.Result
      **/
-
     @Log(remark = "新增店铺",operationType = OperationType.INSERT)
     @SaCheckPermission("shop.add")
     @PostMapping("/addShop")

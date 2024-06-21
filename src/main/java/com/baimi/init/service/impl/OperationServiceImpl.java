@@ -40,7 +40,6 @@ public class OperationServiceImpl extends ServiceImpl<OperationMapper, Operation
             operationVO.setUsername(userService.getUsernameById(operation.getUserId()));
             operationVOS.add(operationVO);
         });
-        //System.out.println(operationVOS);
         return operationVOS;
     }
 }
