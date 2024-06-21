@@ -25,10 +25,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         User user = this.baseMapper.selectOne(wrapper);
         Asserts.notNull(user, "账户或密码错误");
         StpUtil.login(user.getPhone());
+        StpUtil.getSession().set("userId", user.getId());
         UserInfo userInfo = new UserInfo(user);
-        //Session的存储是每个登录用户一个Session
-        //使用登录Id也就是手机号作为键，创建在redis
-        //dataMap使用ConcurrentHashMap 所以线程安全
         StpUtil.getSession().set("user", userInfo);
         return StpUtil.getTokenInfo().tokenValue;
     }
@@ -55,5 +53,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         User user = this.baseMapper.selectOne(wrapper);
         if(user==null) return -1;
         return user.getId();
+    }
+
+    @Override
+    public String getUsernameById(Integer userId) {
+        User user = this.baseMapper.selectById(userId);
+        return user!=null?user.getUsername():"用户状态已更改";
     }
 }

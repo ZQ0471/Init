@@ -2,6 +2,8 @@ package com.baimi.init.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baimi.init.common.Asserts;
+import com.baimi.init.common.annotation.Log;
+import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Shop;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IShopService;
@@ -30,6 +32,7 @@ public class ShopController {
      * @return com.baimi.init.result.Result
      **/
 
+    @Log(remark = "新增店铺",operationType = OperationType.INSERT)
     @SaCheckPermission("shop.add")
     @PostMapping("/addShop")
     public Result addShop(@RequestBody Shop shop) {
@@ -44,7 +47,7 @@ public class ShopController {
      * @since  2024/6/19
      * @return com.baimi.init.result.Result
      **/
-
+    @Log(remark = "查询店铺列表",operationType = OperationType.LIST)
     @SaCheckPermission("shop.list")
     @GetMapping("/list")
     public Result list() {
