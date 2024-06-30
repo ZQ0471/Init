@@ -2,6 +2,7 @@ package com.baimi.init.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.common.Asserts;
+import com.baimi.init.common.UserState;
 import com.baimi.init.dto.UserInfo;
 import com.baimi.init.entity.User;
 import com.baimi.init.mapper.UserMapper;
@@ -12,12 +13,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Resource
+    private UserState userState;
     @Override
     public String login(User loginUser) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
@@ -25,9 +29,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         User user = this.baseMapper.selectOne(wrapper);
         Asserts.notNull(user, "账户或密码错误");
         StpUtil.login(user.getPhone());
-        StpUtil.getSession().set("userId", user.getId());
-        UserInfo userInfo = new UserInfo(user);
-        StpUtil.getSession().set("user", userInfo);
+        userState.updateUserStatement(user);
         return StpUtil.getTokenInfo().tokenValue;
     }
 
@@ -47,12 +49,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Integer getUserIdByPhone(String phone) {
+    public User getUserByPhone(String phone) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getPhone,phone);
-        User user = this.baseMapper.selectOne(wrapper);
-        if(user==null) return -1;
-        return user.getId();
+        return this.baseMapper.selectOne(wrapper);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.baimi.init.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.common.annotation.Log;
@@ -35,11 +36,11 @@ public class UserController {
     @Log(remark = "查询用户信息",operationType = OperationType.LIST)
     @GetMapping("/userInfo")
     public Result hello() {
-        return Result.ok().data("user",StpUtil.getSession().get("user"));
+        return Result.ok().data("userInfo",StpUtil.getSession().get("userInfo"));
     }
 
     @Log(remark = "用户测试",operationType = OperationType.OTHER)
-    @SaCheckRole("admin")
+    @SaCheckRole("user")
     @GetMapping("/test")
     public Result test() {
         return Result.ok().data("roles", StpUtil.getSession().get("roles"))
@@ -51,6 +52,7 @@ public class UserController {
         return Result.ok().data("token", token);
     }
     @Log(remark = "获取用户列表",operationType = OperationType.LIST)
+    @SaCheckPermission("user.list")
     @GetMapping("/list")
     public Result list(UserQuery userQuery) {
         return Result.ok().data("list", userService.getUserList(userQuery));

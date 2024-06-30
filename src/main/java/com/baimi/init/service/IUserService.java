@@ -21,7 +21,7 @@ public interface IUserService extends IService<User> {
 
     List<UserInfo> getUserList(UserQuery userQuery);
 
-    Integer getUserIdByPhone(String phone);
+    User getUserByPhone(String phone);
 
     String getUsernameById(Integer userId);
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +15,8 @@ public class UserInfo {
     private String phone;
     private String avatar;
     private String username;
+    private List<String> roles;
+    private List<String> permissions;
 
     public UserInfo(User user) {
         this.account = user.getAccount();
