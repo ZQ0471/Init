@@ -52,6 +52,11 @@ public class UserController {
         String token = userService.login(loginUser);
         return Result.ok().data("token", token);
     }
+    @PostMapping("/register")
+    public Result register(@RequestBody User user) {
+        String token = userService.register(user);
+        return Result.ok().data("token", token);
+    }
     @Log(remark = "获取用户列表",operationType = OperationType.LIST)
     @SaCheckPermission("user.list")
     @GetMapping("/list")

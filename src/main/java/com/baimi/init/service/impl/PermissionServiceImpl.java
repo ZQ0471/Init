@@ -6,6 +6,7 @@ import com.baimi.init.mapper.PermissionMapper;
 import com.baimi.init.query.PageQuery;
 import com.baimi.init.service.IPermissionService;
 import com.baimi.init.vo.PermissionVO;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,13 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         Page<Permission> page = new Page<>(pageQuery.getPageNo(), pageQuery.getPageSize());
         List<Permission> permissionList = this.page(page).getRecords();
         return permissionList.stream().map(PermissionVO::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean addPermission(Permission permission) {
+        LambdaQueryWrapper<Permission> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Permission::getName, permission.getName());
+        Asserts.isTrue(this.getOne(wrapper)==null,"权限已存在！");
+        return this.save(permission);
     }
 }

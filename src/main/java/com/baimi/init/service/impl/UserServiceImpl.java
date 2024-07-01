@@ -43,9 +43,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public List<UserInfo> getUserList(UserQuery userQuery) {
+        Asserts.isTrue(userQuery.getPageNo()!=null&&userQuery.getPageSize()!=null,"请输入分页参数！");
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         if(userQuery.getName()!=null) wrapper.like(User::getUsername,userQuery.getName());
-        Asserts.isTrue(userQuery.getPageNo()!=null&&userQuery.getPageSize()!=null,"请输入分页参数！");
         Page<User> page = new Page<>(userQuery.getPageNo(),userQuery.getPageSize());
         this.baseMapper.selectPage(page,wrapper);
         List<UserInfo> list = new ArrayList<>();
@@ -67,5 +67,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public String getUsernameById(Integer userId) {
         User user = this.baseMapper.selectById(userId);
         return user!=null?user.getUsername():"用户状态已更改";
+    }
+
+    @Override
+    public String register(User registerUser) {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getAccount, registerUser.getAccount());
+        Asserts.isTrue(this.getOne(wrapper)==null, "账号已存在！");
+        if(registerUser.getRoleId()==null) registerUser.setRoleId(4);
+        if(registerUser.getUsername()==null) registerUser.setUsername("请尽快改名！");
+        this.save(registerUser);
+        StpUtil.login(registerUser);
+        userState.updateUserStatement(registerUser);
+        return StpUtil.getTokenInfo().tokenValue;
     }
 }

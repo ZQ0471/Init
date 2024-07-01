@@ -20,4 +20,5 @@ public interface IRoleService extends IService<Role> {
     List<RoleVO> getRoleList(PageQuery pageQuery);
 
     String getRoleById(Integer roleId);
+
 }

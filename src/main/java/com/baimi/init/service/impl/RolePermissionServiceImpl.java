@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper, RolePermission> implements IRolePermissionService {
 
     @Override
-    public List<String> getPermissionListByRoleId(Integer roleId) {
+    public List<String> getPermissionsByRoleId(Integer roleId) {
         LambdaQueryWrapper<RolePermission> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(RolePermission::getRoleId, roleId);
         List<RolePermission> rolePermissions = this.list(wrapper);

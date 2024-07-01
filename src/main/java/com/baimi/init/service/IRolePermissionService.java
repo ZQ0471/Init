@@ -14,5 +14,5 @@ import java.util.List;
  * @since 2024-06-21
  */
 public interface IRolePermissionService extends IService<RolePermission> {
-    List<String> getPermissionListByRoleId(Integer roleId);
+    List<String> getPermissionsByRoleId(Integer roleId);
 }

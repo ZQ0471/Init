@@ -33,8 +33,8 @@ public class UserState {
         List<String> roles =  new ArrayList<>();
         roles.add(role);
         userInfo.setRoles(roles);
-        //使用roleId列表获取permission列表
-        List<String> permissions = rolePermissionService.getPermissionListByRoleId(user.getRoleId());
+        //使用roleId获取permission列表
+        List<String> permissions = rolePermissionService.getPermissionsByRoleId(user.getRoleId());
         //转为权限名称
         userInfo.setPermissions(permissions);
         StpUtil.getSession().set("userInfo", userInfo);

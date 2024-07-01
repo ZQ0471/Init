@@ -16,4 +16,6 @@ import java.util.List;
  */
 public interface IPermissionService extends IService<Permission> {
     List<PermissionVO> getPermissionList(PageQuery pageQuery);
+
+    boolean addPermission(Permission permission);
 }

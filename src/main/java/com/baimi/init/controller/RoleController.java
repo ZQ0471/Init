@@ -48,7 +48,8 @@ public class RoleController {
     @SaCheckPermission("role:add")
     @PostMapping("/add")
     public Result addRole(@RequestBody Role role) {
-        if(roleService.addRole(role)) return Result.ok().message("新增角色成功！");
+        boolean result = roleService.addRole(role);
+        if(result) return Result.ok().message("新增角色成功！");
         return Result.error().message("新增角色失败！");
     }
 }
