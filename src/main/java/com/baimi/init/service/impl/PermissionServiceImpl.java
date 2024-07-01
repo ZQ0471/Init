@@ -14,9 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * ClassName PermissionServiceImpl
- * Author zhangqi
- * DATE 2024/6/18 下午3:36
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author zhangqi
+ * @since 2024-06-21
  */
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {

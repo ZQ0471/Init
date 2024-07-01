@@ -39,6 +39,14 @@ public final class RedisUtil {
             log.error(e.getMessage(), e);
         }
     }
+    public void setExpire(String key, Object value, long time) {
+        try {
+            redisTemplate.opsForValue().set(key, value);
+            redisTemplate.expire(key, time, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
 
     /**
      * 指定缓存失效时间
@@ -65,6 +73,18 @@ public final class RedisUtil {
             return redisTemplate.getExpire(key, TimeUnit.SECONDS);
         } else {
             return 0; //不存在
+        }
+    }
+    /*
+     * 删除键
+     */
+    public void del(String key) {
+        try {
+            if (key != null) {
+                redisTemplate.delete(key);
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 }

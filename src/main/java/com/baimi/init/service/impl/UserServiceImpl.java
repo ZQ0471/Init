@@ -17,6 +17,14 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author zhangqi
+ * @since 2024-06-21
+ */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 

@@ -93,12 +93,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!--限流熔断Sentinel-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-            <version>2.1.0.RELEASE</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

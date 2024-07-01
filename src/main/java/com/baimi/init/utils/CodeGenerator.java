@@ -10,8 +10,9 @@ import java.util.Collections;
 
 public class CodeGenerator {
     private static final String outPutDir = "E:\\code\\tempFiles";
+    private static final String tables = "admin_account,admin_role,admin_permission,admin_role_permission,material,category";
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql:///demo", "root", "123456")
+        FastAutoGenerator.create("jdbc:mysql:///material", "root", "123456")
                 .globalConfig(builder -> {
                     builder.author("zhangqi").outputDir(outPutDir); // 指定输出目录
                 })
@@ -26,13 +27,11 @@ public class CodeGenerator {
                         })
                 )
                 .packageConfig(builder ->
-                        builder.pathInfo(Collections.singletonMap(OutputFile.xml, outPutDir+"\\temp\\mapper")) // 设置mapperXml生成路径
+                        builder.pathInfo(Collections.singletonMap(OutputFile.xml, outPutDir+"\\Xml\\mapper")) // 设置mapperXml生成路径
                                 .parent("temp") // 设置父包名
-                                //.moduleName("sys") // 设置父包模块名
-
                 )
                 .strategyConfig(builder ->
-                        builder.addInclude("remark") // 设置需要生成的表名
+                        builder.addInclude(tables) // 设置需要生成的表名
                                 .addTablePrefix() // 设置过滤表前缀
                 )
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板

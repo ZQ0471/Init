@@ -15,9 +15,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * className RoleServiceImpl
- * @author  zhang
- * @since 2024/6/18 下午3:34
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author zhangqi
+ * @since 2024-06-21
  */
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
