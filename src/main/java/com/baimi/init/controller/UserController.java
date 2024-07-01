@@ -5,6 +5,7 @@ import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
+import com.baimi.init.common.enums.OrderStatus;
 import com.baimi.init.entity.User;
 import com.baimi.init.query.UserQuery;
 import com.baimi.init.result.Result;
@@ -43,8 +44,8 @@ public class UserController {
     @SaCheckRole("user")
     @GetMapping("/test")
     public Result test() {
-        return Result.ok().data("roles", StpUtil.getSession().get("roles"))
-                .data("permissions", StpUtil.getSession().get("permissions"));
+        int value = OrderStatus.CANCELED.getValue();
+        return Result.ok().data("value",value);
     }
     @PostMapping("/login")
     public Result login(@RequestBody User loginUser) {
