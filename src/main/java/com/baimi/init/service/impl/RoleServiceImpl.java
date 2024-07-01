@@ -41,4 +41,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         List<Role> roleList = this.page(page).getRecords();
         return roleList.stream().map(RoleVO::new).collect(Collectors.toList());
     }
+
+    @Override
+    public String getRoleById(Integer roleId) {
+        Role role = this.getById(roleId);
+        return role==null?"":role.getName();
+    }
 }

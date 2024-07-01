@@ -18,4 +18,6 @@ public interface IRoleService extends IService<Role> {
     boolean addRole(Role role);
 
     List<RoleVO> getRoleList(PageQuery pageQuery);
+
+    String getRoleById(Integer roleId);
 }

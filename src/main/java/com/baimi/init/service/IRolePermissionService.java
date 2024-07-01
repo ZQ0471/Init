@@ -1,8 +1,8 @@
 package com.baimi.init.service;
 
-import com.baimi.init.entity.Permission;
 import com.baimi.init.entity.RolePermission;
 import com.baomidou.mybatisplus.extension.service.IService;
+
 import java.util.List;
 
 /**
@@ -14,5 +14,5 @@ import java.util.List;
  * @since 2024-06-21
  */
 public interface IRolePermissionService extends IService<RolePermission> {
-    List<Permission> getPermissionListByRoleIdList(List<Integer> roleIdList);
+    List<String> getPermissionListByRoleId(Integer roleId);
 }

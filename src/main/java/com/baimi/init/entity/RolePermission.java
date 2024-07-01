@@ -14,9 +14,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * @ClassName RolePermision
- * @Author zhang
- * @DATE 2024/6/18 下午3:40
+ *
+ * @author zhang
+ * @since 2024/6/18 下午3:40
  */
 @Data
 @NoArgsConstructor
@@ -40,5 +40,5 @@ public class RolePermission implements Serializable {
 
     private Integer roleId;
 
-    private Integer permissionId;
+    private String permission;
 }

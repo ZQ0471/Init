@@ -16,12 +16,14 @@ public class UserInfo {
     private String phone;
     private String avatar;
     private String username;
+    private Integer roleId;
     private List<String> roles;
     private List<String> permissions;
 
     public UserInfo(User user) {
         this.id = user.getId();
         this.account = user.getAccount();
+        this.roleId = user.getRoleId();
         this.phone = user.getPhone();
         this.avatar = user.getAvatar();
         this.username = user.getUsername();
