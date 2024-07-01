@@ -48,4 +48,13 @@ public class UserState {
     public UserInfo getUserInfo(){
         return (UserInfo) StpUtil.getSession().get("userInfo");
     }
+    public Integer getUserId(){
+        return getUserInfo().getId();
+    }
+    public List<String> getRoleList(){
+        return getUserInfo().getRoles();
+    }
+    public List<String> getPermissionList(){
+        return getUserInfo().getPermissions();
+    }
 }

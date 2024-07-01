@@ -1,6 +1,6 @@
 package com.baimi.init.common.aspect;
 
-import cn.dev33.satoken.stp.StpUtil;
+import com.baimi.init.common.UserState;
 import com.baimi.init.common.annotation.Log;
 import com.baimi.init.entity.Operation;
 import com.baimi.init.mapper.OperationMapper;
@@ -20,6 +20,8 @@ import java.lang.reflect.Method;
 public class LogAspect {
     @Resource
     private OperationMapper operationMapper;
+    @Resource
+    private UserState userState;
     @Pointcut("@annotation(com.baimi.init.common.annotation.Log)")
     private void LogPointCut() {}
     @After(value = "LogPointCut()")
@@ -30,7 +32,7 @@ public class LogAspect {
         Log log = method.getAnnotation(Log.class);
         String remark = log.remark();
         String operationType = log.operationType().toString();
-        Integer userId = (Integer) StpUtil.getSession().get("userId");
+        Integer userId = userState.getUserId();
         operationMapper.insert(new Operation(userId, operationType, remark));
     }
 }

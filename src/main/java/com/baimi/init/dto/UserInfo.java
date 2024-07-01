@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserInfo {
+    private int id;
     private String account;
     private String phone;
     private String avatar;
@@ -19,6 +20,7 @@ public class UserInfo {
     private List<String> permissions;
 
     public UserInfo(User user) {
+        this.id = user.getId();
         this.account = user.getAccount();
         this.phone = user.getPhone();
         this.avatar = user.getAvatar();

@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         wrapper.eq(User::getAccount, loginUser.getAccount()).eq(User::getPassword, loginUser.getPassword());
         User user = this.baseMapper.selectOne(wrapper);
         Asserts.notNull(user, "账户或密码错误");
-        StpUtil.login(user.getPhone());
+        StpUtil.login(user);
         userState.updateUserStatement(user);
         return StpUtil.getTokenInfo().tokenValue;
     }
