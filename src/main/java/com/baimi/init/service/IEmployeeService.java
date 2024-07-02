@@ -1,7 +1,10 @@
 package com.baimi.init.service;
 
 import com.baimi.init.entity.Employee;
+import com.baimi.init.query.PageQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 
 /**
@@ -15,4 +18,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IEmployeeService extends IService<Employee> {
 
     Employee selectByUserId(Integer id);
+
+    List<Employee> getEmployeeList(PageQuery pageQuery);
 }

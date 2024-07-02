@@ -1,5 +1,6 @@
 package com.baimi.init.service;
 
+import com.baimi.init.entity.Employee;
 import com.baimi.init.entity.Shop;
 import com.baimi.init.query.PageQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -19,4 +20,6 @@ public interface IShopService extends IService<Shop> {
     List<Shop> getShopList(PageQuery pageQuery);
 
     boolean addShop(Shop shop);
+
+    List<Employee> getShopEmployee(Integer shopId);
 }

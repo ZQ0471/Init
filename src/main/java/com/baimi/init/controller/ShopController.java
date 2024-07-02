@@ -3,6 +3,7 @@ package com.baimi.init.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
+import com.baimi.init.entity.Employee;
 import com.baimi.init.entity.Shop;
 import com.baimi.init.query.PageQuery;
 import com.baimi.init.result.Result;
@@ -49,7 +50,14 @@ public class ShopController {
     @SaCheckPermission("shop.list")
     @GetMapping("/list")
     public Result list(PageQuery pageQuery) {
-        List<Shop> shops = shopService.getShopList(pageQuery);
-        return Result.ok().data("shops", shops).data("total",shops.size());
+        List<Shop> list = shopService.getShopList(pageQuery);
+        return Result.ok().data("list", list).data("total", list.size());
+    }
+    @Log(remark = "查询店员列表",operationType = OperationType.LIST)
+    @SaCheckPermission("shop.list")
+    @GetMapping("/{shopId}/employees")
+    public Result shopEmployee(@PathVariable Integer shopId) {
+        List<Employee> list = shopService.getShopEmployee(shopId);
+        return Result.ok().data("list", list).data("total", list.size());
     }
 }

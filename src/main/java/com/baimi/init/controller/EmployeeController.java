@@ -1,6 +1,7 @@
 package com.baimi.init.controller;
 
-import cn.dev33.satoken.annotation.SaCheckRole;
+import com.baimi.init.entity.Employee;
+import com.baimi.init.query.PageQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IEmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -23,9 +25,11 @@ public class EmployeeController {
     @Resource
     private IEmployeeService employeeService;
 
+
     @GetMapping("/list")
-    public Result list() {
-        return Result.ok().data("list",employeeService.list());
+    public Result list(PageQuery pageQuery) {
+        List<Employee> list = employeeService.getEmployeeList(pageQuery);
+        return Result.ok().data("list",list).data("total",list.size());
     }
 
 }

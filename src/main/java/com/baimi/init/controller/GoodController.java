@@ -25,6 +25,7 @@ public class GoodController {
 
     @GetMapping("/{goodId}/detail")
     public Result detail(@PathVariable("goodId") long goodId) {
+
         return Result.ok().data("goodId", goodId);
     }
 
