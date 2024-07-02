@@ -1,10 +1,10 @@
 package com.baimi.init.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.baimi.init.common.Asserts;
 import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Shop;
+import com.baimi.init.query.PageQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IShopService;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +34,8 @@ public class ShopController {
     @SaCheckPermission("shop.add")
     @PostMapping("/addShop")
     public Result addShop(@RequestBody Shop shop) {
-        boolean save = shopService.save(shop);
-        if (save) {
+        boolean result = shopService.addShop(shop);
+        if (result) {
             return Result.ok().message("新增店铺成功");
         }
         return Result.error().message("新增店铺失败");
@@ -48,9 +48,8 @@ public class ShopController {
     @Log(remark = "查询店铺列表",operationType = OperationType.LIST)
     @SaCheckPermission("shop.list")
     @GetMapping("/list")
-    public Result list() {
-        List<Shop> shops = shopService.list();
-        Asserts.notNull(shops,"查询失败");
-        return Result.ok().data("shops", shops);
+    public Result list(PageQuery pageQuery) {
+        List<Shop> shops = shopService.getShopList(pageQuery);
+        return Result.ok().data("shops", shops).data("total",shops.size());
     }
 }

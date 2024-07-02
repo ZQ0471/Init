@@ -1,6 +1,8 @@
 package com.baimi.init.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import com.baimi.init.common.annotation.Log;
+import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Role;
 import com.baimi.init.query.PageQuery;
 import com.baimi.init.result.Result;
@@ -32,7 +34,8 @@ public class RoleController {
      * @param pageQuery 分页数据
      * @return com.baimi.init.result.Result
      **/
-    @SaCheckPermission("role:list")
+    @Log(remark = "获取角色列表",operationType = OperationType.LIST)
+    @SaCheckPermission("role.list")
     @GetMapping("/list")
     public Result getRoleList(PageQuery pageQuery) {
         List<RoleVO> list = roleService.getRoleList(pageQuery);
@@ -45,7 +48,8 @@ public class RoleController {
      * @param role 角色
      * @return Result
      **/
-    @SaCheckPermission("role:add")
+    @Log(remark = "新增角色",operationType = OperationType.INSERT)
+    @SaCheckPermission("role.add")
     @PostMapping("/add")
     public Result addRole(@RequestBody Role role) {
         boolean result = roleService.addRole(role);

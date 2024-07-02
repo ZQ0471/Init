@@ -39,7 +39,6 @@ public class UserController {
     public Result hello() {
         return Result.ok().data("userInfo",StpUtil.getSession().get("userInfo"));
     }
-
     @Log(remark = "用户测试",operationType = OperationType.OTHER)
     @SaCheckRole("user")
     @GetMapping("/test")

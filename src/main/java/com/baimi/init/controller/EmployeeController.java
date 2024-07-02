@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 public class EmployeeController {
     @Resource
     private IEmployeeService employeeService;
-    @SaCheckRole("admin")
+
     @GetMapping("/list")
     public Result list() {
         return Result.ok().data("list",employeeService.list());
