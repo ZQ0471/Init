@@ -28,5 +28,4 @@ public class GoodController {
 
         return Result.ok().data("goodId", goodId);
     }
-
 }

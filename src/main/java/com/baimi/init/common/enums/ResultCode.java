@@ -1,5 +1,8 @@
-package com.baimi.init.result;
+package com.baimi.init.common.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum ResultCode {
     SUCCESS(200, "成功"),
 
@@ -13,11 +16,4 @@ public enum ResultCode {
         this.description = description;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 }
