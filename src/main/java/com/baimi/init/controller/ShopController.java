@@ -5,7 +5,7 @@ import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Employee;
 import com.baimi.init.entity.Shop;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IShopService;
 import org.springframework.web.bind.annotation.*;

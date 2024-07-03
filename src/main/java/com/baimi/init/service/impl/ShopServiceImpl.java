@@ -5,7 +5,7 @@ import com.baimi.init.entity.Employee;
 import com.baimi.init.entity.Shop;
 import com.baimi.init.mapper.EmployeeMapper;
 import com.baimi.init.mapper.ShopMapper;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.service.IShopService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

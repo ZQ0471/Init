@@ -1,4 +1,4 @@
-package com.baimi.init.query;
+package com.baimi.init.dto;
 
 import lombok.Data;
 

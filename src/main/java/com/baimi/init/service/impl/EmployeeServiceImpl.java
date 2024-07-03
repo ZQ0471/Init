@@ -3,7 +3,7 @@ package com.baimi.init.service.impl;
 import com.baimi.init.common.Asserts;
 import com.baimi.init.entity.Employee;
 import com.baimi.init.mapper.EmployeeMapper;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.service.IEmployeeService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

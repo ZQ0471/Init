@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Role;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IRoleService;
 import com.baimi.init.vo.RoleVO;

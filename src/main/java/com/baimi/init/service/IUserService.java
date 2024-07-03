@@ -2,7 +2,7 @@ package com.baimi.init.service;
 
 import com.baimi.init.dto.UserInfo;
 import com.baimi.init.entity.User;
-import com.baimi.init.query.UserQuery;
+import com.baimi.init.dto.UserQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

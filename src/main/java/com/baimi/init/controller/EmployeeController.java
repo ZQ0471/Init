@@ -1,7 +1,7 @@
 package com.baimi.init.controller;
 
 import com.baimi.init.entity.Employee;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IEmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;

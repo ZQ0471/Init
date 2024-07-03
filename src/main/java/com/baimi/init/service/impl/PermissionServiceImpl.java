@@ -3,7 +3,7 @@ package com.baimi.init.service.impl;
 import com.baimi.init.common.Asserts;
 import com.baimi.init.entity.Permission;
 import com.baimi.init.mapper.PermissionMapper;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.service.IPermissionService;
 import com.baimi.init.vo.PermissionVO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -38,6 +38,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         LambdaQueryWrapper<Permission> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Permission::getName, permission.getName());
         Asserts.isTrue(this.getOne(wrapper)==null,"权限已存在！");
+        if(permission.getRemark()==null) permission.setRemark("暂无说明");
         return this.save(permission);
     }
 }

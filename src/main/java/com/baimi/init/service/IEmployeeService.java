@@ -1,7 +1,7 @@
 package com.baimi.init.service;
 
 import com.baimi.init.entity.Employee;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

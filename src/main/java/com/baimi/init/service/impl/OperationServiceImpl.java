@@ -3,7 +3,7 @@ package com.baimi.init.service.impl;
 import com.baimi.init.common.Asserts;
 import com.baimi.init.entity.Operation;
 import com.baimi.init.mapper.OperationMapper;
-import com.baimi.init.query.OperationQuery;
+import com.baimi.init.dto.OperationQuery;
 import com.baimi.init.service.IOperationService;
 import com.baimi.init.service.IUserService;
 import com.baimi.init.vo.OperationVO;

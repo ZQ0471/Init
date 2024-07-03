@@ -6,7 +6,7 @@ import com.baimi.init.common.UserState;
 import com.baimi.init.dto.UserInfo;
 import com.baimi.init.entity.User;
 import com.baimi.init.mapper.UserMapper;
-import com.baimi.init.query.UserQuery;
+import com.baimi.init.dto.UserQuery;
 import com.baimi.init.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

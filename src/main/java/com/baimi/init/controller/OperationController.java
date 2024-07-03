@@ -1,6 +1,6 @@
 package com.baimi.init.controller;
 
-import com.baimi.init.query.OperationQuery;
+import com.baimi.init.dto.OperationQuery;
 import com.baimi.init.result.Result;
 import com.baimi.init.service.IOperationService;
 import com.baimi.init.vo.OperationVO;

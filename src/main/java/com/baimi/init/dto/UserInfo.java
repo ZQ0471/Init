@@ -1,7 +1,6 @@
 package com.baimi.init.dto;
 
 import com.baimi.init.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +8,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserInfo {
     private int id;
     private String account;

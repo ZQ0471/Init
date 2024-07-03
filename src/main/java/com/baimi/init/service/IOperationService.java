@@ -1,7 +1,7 @@
 package com.baimi.init.service;
 
 import com.baimi.init.entity.Operation;
-import com.baimi.init.query.OperationQuery;
+import com.baimi.init.dto.OperationQuery;
 import com.baimi.init.vo.OperationVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 

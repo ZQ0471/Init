@@ -3,7 +3,7 @@ package com.baimi.init.service.impl;
 import com.baimi.init.common.Asserts;
 import com.baimi.init.entity.Role;
 import com.baimi.init.mapper.RoleMapper;
-import com.baimi.init.query.PageQuery;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.service.IRoleService;
 import com.baimi.init.vo.RoleVO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
