@@ -32,11 +32,9 @@ public class UserState {
         String role = roleService.getRoleById(user.getRoleId());
         List<String> roles =  new ArrayList<>();
         roles.add(role);
-        userInfo.setRoles(roles);
-        //使用roleId获取permission列表
         List<String> permissions = rolePermissionService.getPermissionsByRoleId(user.getRoleId());
-        //转为权限名称
-        userInfo.setPermissions(permissions);
+        StpUtil.getSession().set("roles", roles);
+        StpUtil.getSession().set("permissions", permissions);
         StpUtil.getSession().set("userInfo", userInfo);
     }
     public UserInfo getUserInfo(){
@@ -46,9 +44,9 @@ public class UserState {
         return getUserInfo().getId();
     }
     public List<String> getRoleList(){
-        return getUserInfo().getRoles();
+        return (List<String>) StpUtil.getSession().get("roles");
     }
     public List<String> getPermissionList(){
-        return getUserInfo().getPermissions();
+        return (List<String>) StpUtil.getSession().get("permissions");
     }
 }

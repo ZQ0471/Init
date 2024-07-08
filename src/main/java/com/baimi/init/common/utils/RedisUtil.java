@@ -1,4 +1,4 @@
-package com.baimi.init.utils;
+package com.baimi.init.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

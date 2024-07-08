@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 18080
 spring:
   # redis配置
   redis:
@@ -27,10 +27,6 @@ spring:
     restart:
       enabled: true  #设置开启热部署
       additional-paths: src/main/java #重启目录
-  cloud:
-    sentinel:
-      transport:
-        dashboard: localhost:8090
   # mysql
   datasource:
     username: root

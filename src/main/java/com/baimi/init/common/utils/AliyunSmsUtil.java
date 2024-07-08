@@ -1,4 +1,4 @@
-package com.baimi.init.utils;
+package com.baimi.init.common.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.DefaultAcsClient;
