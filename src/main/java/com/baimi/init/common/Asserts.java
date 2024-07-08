@@ -1,6 +1,6 @@
 package com.baimi.init.common;
 
-import com.baimi.init.exception.BadRequestException;
+import com.baimi.init.common.exception.BadRequestException;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 

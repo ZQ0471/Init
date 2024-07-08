@@ -1,7 +1,7 @@
 package com.baimi.init.controller;
 
 import com.baimi.init.entity.RolePermission;
-import com.baimi.init.result.Result;
+import com.baimi.init.common.Result;
 import com.baimi.init.service.IRolePermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PutMapping;

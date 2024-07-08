@@ -4,7 +4,7 @@ import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Permission;
 import com.baimi.init.dto.PageQuery;
-import com.baimi.init.result.Result;
+import com.baimi.init.common.Result;
 import com.baimi.init.service.IPermissionService;
 import com.baimi.init.vo.PermissionVO;
 import lombok.extern.slf4j.Slf4j;

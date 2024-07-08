@@ -1,4 +1,4 @@
-package com.baimi.init.exception;
+package com.baimi.init.common.exception;
 
 
 /**

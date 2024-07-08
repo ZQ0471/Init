@@ -8,7 +8,7 @@ import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.common.enums.OrderStatus;
 import com.baimi.init.dto.UserQuery;
 import com.baimi.init.entity.User;
-import com.baimi.init.result.Result;
+import com.baimi.init.common.Result;
 import com.baimi.init.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +34,7 @@ public class UserController {
 
     /**
      * @since 上午10:55 2024/6/17
-     * @return com.baimi.init.result.Result
+     * @return com.baimi.init.common.Result
      **/
     @Log(remark = "查询用户信息",operationType = OperationType.LIST)
     @GetMapping("/userInfo")

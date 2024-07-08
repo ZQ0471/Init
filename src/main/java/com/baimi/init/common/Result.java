@@ -1,4 +1,4 @@
-package com.baimi.init.result;
+package com.baimi.init.common;
 
 import com.baimi.init.common.enums.ResultCode;
 import lombok.Getter;

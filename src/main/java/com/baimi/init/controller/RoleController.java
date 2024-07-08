@@ -5,7 +5,7 @@ import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Role;
 import com.baimi.init.dto.PageQuery;
-import com.baimi.init.result.Result;
+import com.baimi.init.common.Result;
 import com.baimi.init.service.IRoleService;
 import com.baimi.init.vo.RoleVO;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class RoleController {
      * 获取角色列表
      * @since  2024/6/19
      * @param pageQuery 分页数据
-     * @return com.baimi.init.result.Result
+     * @return com.baimi.init.common.Result
      **/
     @Log(remark = "获取角色列表",operationType = OperationType.LIST)
     @SaCheckPermission("role.list")
