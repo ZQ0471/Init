@@ -59,6 +59,7 @@ public class Operation implements Serializable {
     /**
      * 描述说明
      */
+    @TableField(updateStrategy = FieldStrategy.NOT_EMPTY)
     private String remark;
 
     public Operation(Integer userId, String type, String remark) {

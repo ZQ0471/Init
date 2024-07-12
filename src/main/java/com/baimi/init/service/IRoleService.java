@@ -1,9 +1,9 @@
 package com.baimi.init.service;
 
-import com.baimi.init.entity.Role;
 import com.baimi.init.dto.PageQuery;
-import com.baimi.init.vo.RoleVO;
+import com.baimi.init.entity.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
+
 import java.util.List;
 
 /**
@@ -17,8 +17,9 @@ import java.util.List;
 public interface IRoleService extends IService<Role> {
     boolean addRole(Role role);
 
-    List<RoleVO> getRoleList(PageQuery pageQuery);
+    List<Role> getRoleList(PageQuery pageQuery);
 
     String getRoleById(Integer roleId);
 
+    boolean updateRole(Role role);
 }

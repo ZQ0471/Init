@@ -1,15 +1,13 @@
 package com.baimi.init.controller;
 
-import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.annotation.SaCheckRole;
+import com.baimi.init.common.Result;
 import com.baimi.init.common.UserState;
 import com.baimi.init.common.annotation.Log;
 import com.baimi.init.common.enums.OperationType;
-import com.baimi.init.common.enums.OrderStatus;
 import com.baimi.init.dto.UserQuery;
 import com.baimi.init.entity.User;
-import com.baimi.init.common.Result;
 import com.baimi.init.service.IUserService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +30,7 @@ public class UserController {
     @Resource
     private UserState userState;
 
+
     /**
      * @since 上午10:55 2024/6/17
      * @return com.baimi.init.common.Result
@@ -42,24 +41,22 @@ public class UserController {
         return Result.ok().data("userInfo",userState.getUserInfo());
     }
     @Log(remark = "用户测试",operationType = OperationType.OTHER)
-    @SaCheckRole("user")
     @GetMapping("/test")
-    public Result test() {
-        int value = OrderStatus.CANCELED.getValue();
-        return Result.ok().data("value",value);
+    public Result test(UserQuery userQuery) {
+        Page<User> page = userService.getUserPage(userQuery);
+        return Result.ok().data("page",page);
     }
     @PostMapping("/login")
     public Result login(@RequestBody User loginUser) {
         String token = userService.login(loginUser);
         return Result.ok().data("token", token);
     }
-    @PostMapping("/register")
+    @PostMapping("/add")
     public Result register(@RequestBody User user) {
-        String token = userService.register(user);
+        String token = userService.addUser(user);
         return Result.ok().data("token", token);
     }
     @Log(remark = "获取用户列表",operationType = OperationType.LIST)
-    @SaCheckPermission("user.list")
     @GetMapping("/list")
     public Result list(UserQuery userQuery) {
         return Result.ok().data("list", userService.getUserList(userQuery));

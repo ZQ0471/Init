@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,5 +36,8 @@ public class Role implements Serializable {
     private String name;
 
     private String remark;
+
+    @TableField(exist = false)
+    private List<String> permissions;
 
 }

@@ -3,6 +3,7 @@ package com.baimi.init.service;
 import com.baimi.init.dto.UserInfo;
 import com.baimi.init.entity.User;
 import com.baimi.init.dto.UserQuery;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -21,9 +22,9 @@ public interface IUserService extends IService<User> {
 
     List<UserInfo> getUserList(UserQuery userQuery);
 
-    User getUserByPhone(String phone);
 
-    String getUsernameById(Integer userId);
+    String addUser(User user);
 
-    String register(User user);
+    Page<User> getUserPage(UserQuery userQuery);
+
 }

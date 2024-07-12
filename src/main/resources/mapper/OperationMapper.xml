@@ -1,0 +1,12 @@
+<?mapper.xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baimi.init.mapper.OperationMapper">
+    <select id="getOperationList" resultType="com.baimi.init.vo.OperationVO">
+    SELECT
+    u.username,o.remark,o.type,o.modify_time
+    FROM
+    user u LEFT JOIN  operation o
+        on u.id = o.user_id
+    LIMIT #{offset}, #{pageSize};
+    </select>
+</mapper>

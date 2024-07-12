@@ -28,4 +28,14 @@ public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper,
         List<RolePermission> rolePermissions = this.list(wrapper);
         return rolePermissions.stream().map(RolePermission::getPermission).collect(Collectors.toList());
     }
+
+    @Override
+    public void updateRole(Integer roleId, List<String> permissions) {
+        LambdaQueryWrapper<RolePermission> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(RolePermission::getRoleId, roleId);
+        this.remove(wrapper);
+        permissions.forEach(permission -> {
+            this.save(new RolePermission(roleId,permission));
+        });
+    }
 }

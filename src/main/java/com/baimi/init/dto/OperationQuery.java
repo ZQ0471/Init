@@ -11,4 +11,5 @@ import lombok.EqualsAndHashCode;
 @Data
 public class OperationQuery extends PageQuery {
     private String type;
+    private long offset;
 }

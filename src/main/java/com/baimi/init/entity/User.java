@@ -1,12 +1,14 @@
 package com.baimi.init.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -34,5 +36,11 @@ public class User implements Serializable {
     private String phone;
 
     private Integer roleId;
+
+    @TableField(exist = false)
+    private String roleName;
+
+    @TableField(exist = false)
+    private List<String > permissions;
 
 }
