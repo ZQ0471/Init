@@ -1,14 +1,12 @@
 package com.baimi.init.common;
 
 import com.baimi.init.common.enums.ResultCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Setter
-@Getter
+@Data
 public class Result {
     private Boolean success;
 

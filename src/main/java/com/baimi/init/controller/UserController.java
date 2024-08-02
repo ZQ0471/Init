@@ -31,6 +31,7 @@ public class UserController {
     private UserState userState;
 
 
+
     /**
      * @since 上午10:55 2024/6/17
      * @return com.baimi.init.common.Result
@@ -46,6 +47,7 @@ public class UserController {
         Page<User> page = userService.getUserPage(userQuery);
         return Result.ok().data("page",page);
     }
+    @Log(remark = "用户登录",operationType = OperationType.OTHER)
     @PostMapping("/login")
     public Result login(@RequestBody User loginUser) {
         String token = userService.login(loginUser);

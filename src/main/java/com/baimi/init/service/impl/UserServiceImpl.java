@@ -3,6 +3,7 @@ package com.baimi.init.service.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baimi.init.common.Asserts;
 import com.baimi.init.common.UserState;
+import com.baimi.init.common.utils.Md5Util;
 import com.baimi.init.dto.UserInfo;
 import com.baimi.init.dto.UserQuery;
 import com.baimi.init.entity.User;
@@ -33,9 +34,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public String login(User loginUser) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(User::getAccount, loginUser.getAccount()).eq(User::getPassword, loginUser.getPassword());
+        wrapper.eq(User::getAccount, loginUser.getAccount());
         User user = this.baseMapper.selectOne(wrapper);
-        Asserts.notNull(user, "账户或密码错误");
+        Asserts.notNull(user, "账户不存在！");
+        Asserts.isTrue(user.getPassword().equals(Md5Util.getMd5(loginUser.getPassword())),"密码错误");
         StpUtil.login(user);
         userState.updateUserStatement(user);
         return StpUtil.getTokenInfo().tokenValue;
@@ -50,8 +52,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return this.list(page, wrapper).stream().map(UserInfo::new).collect(Collectors.toList());
     }
 
-
-
     @Override
     public String addUser(User registerUser) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
@@ -59,6 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         Asserts.isTrue(this.getOne(wrapper)==null, "账号已存在！");
         if(registerUser.getRoleId()==null) registerUser.setRoleId(4);
         if(registerUser.getUsername()==null) registerUser.setUsername("请尽快改名！");
+        registerUser.setPassword(Md5Util.getMd5(registerUser.getPassword()));
         this.save(registerUser);
         StpUtil.login(registerUser);
         userState.updateUserStatement(registerUser);
