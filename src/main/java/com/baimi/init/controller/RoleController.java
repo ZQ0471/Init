@@ -55,6 +55,7 @@ public class RoleController {
         if(result) return Result.ok().message("新增角色成功！");
         return Result.error().message("新增角色失败！");
     }
+
     @Log(remark = "修改角色",operationType = OperationType.UPDATE)
     @PostMapping("/update")
     public Result updateRole(@RequestBody Role role) {

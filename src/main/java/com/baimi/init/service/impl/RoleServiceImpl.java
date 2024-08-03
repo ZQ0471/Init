@@ -60,6 +60,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
             LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<>();
             wrapper.eq(Role::getName, role.getName());
             Asserts.isTrue(this.count(wrapper)==0,"角色名称已存在");
+            boolean save =  this.updateById(role);
+            if (save){
+                rolePermissionService.updateRole(role.getId(),role.getPermissions());
+            }
         }
         return false;
     }
