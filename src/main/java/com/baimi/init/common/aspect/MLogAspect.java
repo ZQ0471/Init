@@ -1,7 +1,7 @@
 package com.baimi.init.common.aspect;
 
 import com.baimi.init.common.UserState;
-import com.baimi.init.common.annotation.Log;
+import com.baimi.init.common.annotation.MLog;
 import com.baimi.init.entity.Operation;
 import com.baimi.init.mapper.OperationMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -19,19 +19,19 @@ import java.lang.reflect.Method;
 @Component
 @Aspect
 @Slf4j
-public class LogAspect {
+public class MLogAspect {
     @Resource
     private OperationMapper operationMapper;
     @Resource
     private UserState userState;
-    @Pointcut("@annotation(com.baimi.init.common.annotation.Log)")
+    @Pointcut("@annotation(com.baimi.init.common.annotation.MLog)")
     private void LogPointCut() {}
     @After(value = "LogPointCut()")
     public void logOperation(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
-        Log log = method.getAnnotation(Log.class);
+        MLog log = method.getAnnotation(MLog.class);
         String remark = log.remark();
         String operationType = log.operationType().toString();
         Integer userId = userState.getUserId();
@@ -42,7 +42,7 @@ public class LogAspect {
         // 获取方法签名
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        Log myLog = method.getAnnotation(Log.class);
+        MLog myLog = method.getAnnotation(MLog.class);
         String remark = myLog.remark();
         String operationType = myLog.operationType().toString();
 

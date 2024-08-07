@@ -87,4 +87,12 @@ public final class RedisUtil {
             log.error(e.getMessage(), e);
         }
     }
+
+    public Boolean setIfAbsent(String uniqueKey, String code, int timeout, TimeUnit timeUnit) {
+        return redisTemplate.opsForValue().setIfAbsent(uniqueKey, code, timeout, timeUnit);
+    }
+
+    public void put(String uniqueKey, String code, long l, TimeUnit timeUnit) {
+        redisTemplate.opsForValue().set(uniqueKey, code, l, timeUnit);
+    }
 }

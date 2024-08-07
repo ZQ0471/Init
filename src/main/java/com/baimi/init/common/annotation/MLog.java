@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 * */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Log {
+public @interface MLog {
     /*
     * 操作名称*/
     String remark() default "";

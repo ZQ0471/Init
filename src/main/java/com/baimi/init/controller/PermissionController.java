@@ -1,6 +1,6 @@
 package com.baimi.init.controller;
 
-import com.baimi.init.common.annotation.Log;
+import com.baimi.init.common.annotation.MLog;
 import com.baimi.init.common.enums.OperationType;
 import com.baimi.init.entity.Permission;
 import com.baimi.init.dto.PageQuery;
@@ -28,13 +28,13 @@ public class PermissionController {
     @Resource
     private IPermissionService permissionService;
 
-    @Log(remark = "获取权限列表",operationType = OperationType.LIST)
+    @MLog(remark = "获取权限列表",operationType = OperationType.LIST)
     @GetMapping("/list")
     public Result getPermissionList(PageQuery pageQuery){
         List<PermissionVO> list = permissionService.getPermissionList(pageQuery);
         return Result.ok().data("list", list).data("total", list.size());
     }
-    @Log(remark = "新增权限",operationType = OperationType.INSERT)
+    @MLog(remark = "新增权限",operationType = OperationType.INSERT)
     @PostMapping("/add")
     public Result addPermission(@RequestBody Permission permission){
         boolean result = permissionService.addPermission(permission);
