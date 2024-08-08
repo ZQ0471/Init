@@ -2,14 +2,16 @@ package com.baimi.init.controller;
 
 import com.baimi.init.common.Result;
 import com.baimi.init.common.UserState;
+import com.baimi.init.common.annotation.Idempotent;
 import com.baimi.init.common.annotation.MLog;
-import com.baimi.init.common.enums.OperationType;
+import com.baimi.init.common.enums.TypeEnum;
 import com.baimi.init.dto.UserQuery;
 import com.baimi.init.entity.User;
 import com.baimi.init.service.IUserService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 
@@ -31,23 +33,27 @@ public class UserController {
     private UserState userState;
 
 
-
     /**
      * @since 上午10:55 2024/6/17
      * @return com.baimi.init.common.Result
      **/
-    @MLog(remark = "查询用户信息",operationType = OperationType.LIST)
     @GetMapping("/userInfo")
     public Result info() {
         return Result.ok().data("userInfo",userState.getUserInfo());
     }
-    @MLog(remark = "用户测试",operationType = OperationType.OTHER)
+
+
+    @MLog(remark = "用户测试")
     @GetMapping("/test")
-    public Result test(UserQuery userQuery) {
-        Page<User> page = userService.getUserPage(userQuery);
-        return Result.ok().data("page",page);
+    @Idempotent(
+            type = TypeEnum.TOKEN,
+            message = "访问太频繁，请稍后再试"
+    )
+    public Result test(String msg,Integer id) {
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        String s = sra.getRequest().getServletPath();
+        return Result.ok().data("path",s);
     }
-    @MLog(remark = "用户登录",operationType = OperationType.OTHER)
     @PostMapping("/login")
     public Result login(@RequestBody User loginUser) {
         String token = userService.login(loginUser);
@@ -58,7 +64,6 @@ public class UserController {
         String token = userService.addUser(user);
         return Result.ok().data("token", token);
     }
-    @MLog(remark = "获取用户列表",operationType = OperationType.LIST)
     @GetMapping("/list")
     public Result list(UserQuery userQuery) {
         return Result.ok().data("list", userService.getUserList(userQuery));

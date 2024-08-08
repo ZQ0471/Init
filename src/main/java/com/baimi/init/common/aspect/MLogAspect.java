@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 @Component
 @Aspect
@@ -31,35 +32,24 @@ public class MLogAspect {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
+
         MLog log = method.getAnnotation(MLog.class);
+
         String remark = log.remark();
+
         String operationType = log.operationType().toString();
-        Integer userId = userState.getUserId();
-        operationMapper.insert(new Operation(userId, operationType, remark));
-    }
-    /*@Around("LogPointCut()")
-    public Object logOperation(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 获取方法签名
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        MLog myLog = method.getAnnotation(MLog.class);
-        String remark = myLog.remark();
-        String operationType = myLog.operationType().toString();
+
+        String methodName = method.getName();
 
         // 获取参数
-        Object[] args = joinPoint.getArgs();
-        String params = Arrays.toString(args);
-
-        // 执行方法并获取结果
-        Object result = joinPoint.proceed(); // 必须调用proceed()来执行原方法
+        String params = Arrays.toString(joinPoint.getArgs());
 
         // 记录日志
-        Integer userId = userState.getUserId();
+        String username = userState.getUserInfo().getUsername();
 
-        log.error("userId:{}, operationType:{}, remark:{}, params:{}, result:{}", userId, operationType, remark, params, result);
-        //operationMapper.insert(new Operation(userId, operationType, remark, params, result));
+        String path = userState.getPath();
 
-        // 返回方法执行结果
-        return result;
-    }*/
+        operationMapper.insert(new Operation(username, operationType, remark,path,methodName, params));
+    }
+
 }

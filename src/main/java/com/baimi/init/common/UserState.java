@@ -6,10 +6,14 @@ import com.baimi.init.entity.User;
 import com.baimi.init.service.IRolePermissionService;
 import com.baimi.init.service.IRoleService;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ClassName UserState
@@ -40,13 +44,21 @@ public class UserState {
     public UserInfo getUserInfo(){
         return (UserInfo) StpUtil.getSession().get("userInfo");
     }
-    public Integer getUserId(){
-        return getUserInfo().getId();
-    }
+
     public List<String> getRoleList(){
         return (List<String>) StpUtil.getSession().get("roles");
     }
     public List<String> getPermissionList(){
         return (List<String>) StpUtil.getSession().get("permissions");
     }
+    public String getCurrentToken() {
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
+                .getRequest();
+        return request.getHeader("satoken");
+    }
+    public String getPath() {
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        return sra.getRequest().getServletPath();
+    }
+
 }

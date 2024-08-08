@@ -8,8 +8,11 @@ import org.springframework.util.DigestUtils;
  */
 public class Md5Util {
 
-    private static final String salt = "b4i[;[].mlo9+45i+ds";
+    private static final String salt = "b4i[+45i+ds";
     public static String getMd5(String str) {
-        return salt + DigestUtils.md5DigestAsHex(str.getBytes());
+        return salt + DigestUtils.md5DigestAsHex(str.getBytes()).substring(1, 18);
+    }
+    public static String getCalcArgsMD5(String str) {
+        return DigestUtils.md5DigestAsHex(str.getBytes());
     }
 }

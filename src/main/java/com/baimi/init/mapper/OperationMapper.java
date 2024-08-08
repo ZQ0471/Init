@@ -1,11 +1,7 @@
 package com.baimi.init.mapper;
 
-import com.baimi.init.dto.OperationQuery;
 import com.baimi.init.entity.Operation;
-import com.baimi.init.vo.OperationVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
-import java.util.List;
 
 /**
  * <p>
@@ -17,5 +13,4 @@ import java.util.List;
  */
 public interface OperationMapper extends BaseMapper<Operation> {
 
-    List<OperationVO> getOperationList(OperationQuery pageQuery);
 }

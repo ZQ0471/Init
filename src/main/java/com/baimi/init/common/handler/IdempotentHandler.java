@@ -1,8 +1,8 @@
 package com.baimi.init.common.handler;
 
-import com.baimi.init.common.idempotent.IdempotentParam;
 import com.baimi.init.common.annotation.Idempotent;
-import org.aspectj.lang.ProceedingJoinPoint;
+import com.baimi.init.common.idempotent.IdempotentParam;
+import org.aspectj.lang.JoinPoint;
 
 public interface IdempotentHandler {
 
@@ -19,19 +19,11 @@ public interface IdempotentHandler {
      * @param joinPoint  AOP 方法处理
      * @param idempotent 幂等注解
      */
-    void execute(ProceedingJoinPoint joinPoint, Idempotent idempotent);
+    void execute(JoinPoint joinPoint, Idempotent idempotent);
 
-    /**
-     * 异常流程处理
-     */
-    default void exceptionProcessing() {
-
-    }
 
     /**
      * 后置处理
      */
-    default void postProcessing() {
-
-    }
+    default void postProcessing(){}
 }

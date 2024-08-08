@@ -49,7 +49,7 @@ public class Operation implements Serializable {
     /**
      * 操作者
      */
-    private Integer userId;
+    private String username;
 
     /**
      * 操作类型 1：信息管理 2：业务流程
@@ -62,10 +62,19 @@ public class Operation implements Serializable {
     @TableField(updateStrategy = FieldStrategy.NOT_EMPTY)
     private String remark;
 
-    public Operation(Integer userId, String type, String remark) {
-        this.userId = userId;
+    private String path;
+
+    private String method;
+
+    private String params;
+
+    public Operation(String username, String type, String remark, String path, String method, String params) {
+        this.username = username;
         this.type = type;
         this.remark = remark;
+        this.path = path;
+        this.method = method;
+        this.params = params;
     }
 
 }

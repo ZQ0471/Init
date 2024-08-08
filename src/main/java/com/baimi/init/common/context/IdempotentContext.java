@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public final class IdempotentContext {
 
-    private static ThreadLocal<Map<String, Object>> CONTEXT = new ThreadLocal<>();
+    private static final ThreadLocal<Map<String, Object>> CONTEXT = new ThreadLocal<>();
 
     public static Map<String, Object> get() {
         return CONTEXT.get();

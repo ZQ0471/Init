@@ -7,5 +7,6 @@ import com.baimi.init.common.handler.IdempotentHandler;
  * @description
  * @since 2024/8/7 下午3:33
  */
+
 public interface IdempotentSpELService extends IdempotentHandler {
 }
