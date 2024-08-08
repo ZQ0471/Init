@@ -21,9 +21,4 @@ public interface IdempotentHandler {
      */
     void execute(JoinPoint joinPoint, Idempotent idempotent);
 
-
-    /**
-     * 后置处理
-     */
-    default void postProcessing(){}
 }

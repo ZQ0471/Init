@@ -1,7 +1,6 @@
 package com.baimi.init.common.aspect;
 
 import com.baimi.init.common.annotation.Idempotent;
-import com.baimi.init.common.context.IdempotentContext;
 import com.baimi.init.common.handler.IdempotentHandler;
 import com.baimi.init.common.idempotent.IdempotentHandlerFactory;
 import org.aspectj.lang.JoinPoint;
@@ -33,8 +32,6 @@ public final class IdempotentAspect {
         Idempotent idempotent = getIdempotent(joinPoint);
         IdempotentHandler instance = IdempotentHandlerFactory.getInstance(idempotent.scene(), idempotent.type());
         instance.execute(joinPoint, idempotent);
-        instance.postProcessing();
-        IdempotentContext.clean();
     }
 
     public static Idempotent getIdempotent(JoinPoint joinPoint) throws NoSuchMethodException {

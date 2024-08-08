@@ -2,7 +2,6 @@ package com.baimi.init.common.handler;
 
 import com.baimi.init.common.annotation.Idempotent;
 import com.baimi.init.common.aspect.IdempotentAspect;
-import com.baimi.init.common.context.IdempotentContext;
 import com.baimi.init.common.enums.MQStatusEnum;
 import com.baimi.init.common.exception.MQRepeatException;
 import com.baimi.init.common.idempotent.IdempotentParam;
@@ -47,21 +46,6 @@ public final class IdempotentMQHandler extends IdempotentTemplate implements Ide
             String consumeStatus = (String) redisUtil.get(uniqueKey);
             boolean error = MQStatusEnum.isError(consumeStatus);
             if(!error) throw new MQRepeatException(wrapper.getIdempotent().message());
-        }
-        IdempotentContext.put(WRAPPER, wrapper);
-    }
-
-    @Override
-    public void postProcessing() {
-        IdempotentParam wrapper = (IdempotentParam) IdempotentContext.getKey(WRAPPER);
-        if (wrapper != null) {
-            Idempotent idempotent = wrapper.getIdempotent();
-            String uniqueKey = idempotent.uniqueKeyPrefix() + wrapper.getLockKey();
-            try {
-                redisUtil.put(uniqueKey, MQStatusEnum.CONSUMED.getCode(), idempotent.keyTimeout(), TimeUnit.SECONDS);
-            } catch (Throwable ex) {
-                log.error("[{}] Failed to set MQ anti-heavy token.", uniqueKey);
-            }
         }
     }
 }

@@ -46,7 +46,7 @@ public class UserController {
     @MLog(remark = "用户测试")
     @GetMapping("/test")
     @Idempotent(
-            type = TypeEnum.TOKEN,
+            type = TypeEnum.PARAM,
             message = "访问太频繁，请稍后再试"
     )
     public Result test(String msg,Integer id) {
