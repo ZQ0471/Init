@@ -43,4 +43,5 @@ public @interface Idempotent {
      * {@link SceneEnum#MQ} and {@link TypeEnum#SPEL} 时生效
      */
     long keyTimeout() default 3600L;
+
 }

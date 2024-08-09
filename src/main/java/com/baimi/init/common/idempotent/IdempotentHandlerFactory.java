@@ -1,6 +1,6 @@
 package com.baimi.init.common.idempotent;
 
-import com.baimi.init.common.context.ApplicationContextHolder;
+import com.baimi.init.common.context.ContextHolder;
 import com.baimi.init.common.enums.SceneEnum;
 import com.baimi.init.common.enums.TypeEnum;
 import com.baimi.init.common.handler.IdempotentHandler;
@@ -27,20 +27,20 @@ public final class IdempotentHandlerFactory {
             case RESTAPI:
                 switch (type) {
                     case PARAM:
-                        result = ApplicationContextHolder.getBean(IdempotentParamService.class);
+                        result = ContextHolder.getBean(IdempotentParamService.class);
                         break;
                     case TOKEN:
-                        result = ApplicationContextHolder.getBean(IdempotentTokenService.class);
+                        result = ContextHolder.getBean(IdempotentTokenService.class);
                         break;
                     case SPEL:
-                        result = ApplicationContextHolder.getBean(IdempotentSpELHandler.class);
+                        result = ContextHolder.getBean(IdempotentSpELHandler.class);
                         break;
                     default:
                         break;
                 }
                 break;
             case MQ:
-                result = ApplicationContextHolder.getBean(IdempotentMQHandler.class);
+                result = ContextHolder.getBean(IdempotentMQHandler.class);
                 break;
             default:
                 break;

@@ -3,10 +3,11 @@ package com.baimi.init.common.aspect;
 import com.baimi.init.common.annotation.Idempotent;
 import com.baimi.init.common.handler.IdempotentHandler;
 import com.baimi.init.common.idempotent.IdempotentHandlerFactory;
-import org.aspectj.lang.JoinPoint;
+import com.baimi.init.common.idempotent.IdempotentParam;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
@@ -27,14 +28,17 @@ public final class IdempotentAspect {
      */
     @Pointcut("@annotation(com.baimi.init.common.annotation.Idempotent)")
     private void LogPointCut() {}
-    @Before(value = "LogPointCut()")
-    public void idempotentHandler(JoinPoint joinPoint) throws Throwable {
+    @Around(value = "LogPointCut()")
+    public Object idempotentHandler(ProceedingJoinPoint joinPoint) throws Throwable {
         Idempotent idempotent = getIdempotent(joinPoint);
         IdempotentHandler instance = IdempotentHandlerFactory.getInstance(idempotent.scene(), idempotent.type());
-        instance.execute(joinPoint, idempotent);
+        IdempotentParam param = instance.execute(joinPoint, idempotent);
+        Object result = joinPoint.proceed();
+        instance.postProcess(param);
+        return result;
     }
 
-    public static Idempotent getIdempotent(JoinPoint joinPoint) throws NoSuchMethodException {
+    public static Idempotent getIdempotent(ProceedingJoinPoint  joinPoint) throws NoSuchMethodException {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();

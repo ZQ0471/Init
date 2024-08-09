@@ -10,8 +10,6 @@ import com.baimi.init.entity.User;
 import com.baimi.init.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 
@@ -50,9 +48,8 @@ public class UserController {
             message = "访问太频繁，请稍后再试"
     )
     public Result test(String msg,Integer id) {
-        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        String s = sra.getRequest().getServletPath();
-        return Result.ok().data("path",s);
+
+        return Result.ok();
     }
     @PostMapping("/login")
     public Result login(@RequestBody User loginUser) {

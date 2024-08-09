@@ -1,17 +1,18 @@
 package com.baimi.init.common.handler;
 
 import com.baimi.init.common.UserState;
+import com.baimi.init.common.context.ContextHolder;
 import com.baimi.init.common.exception.IdempotentException;
 import com.baimi.init.common.idempotent.IdempotentParam;
 import com.baimi.init.common.idempotent.IdempotentTemplate;
 import com.baimi.init.common.idempotent.IdempotentTokenService;
-import com.baimi.init.common.utils.RedisUtil;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhang
@@ -23,26 +24,38 @@ import java.util.concurrent.TimeUnit;
 public final class IdempotentTokenHandler extends IdempotentTemplate implements IdempotentTokenService {
 
     @Resource
-    private final RedisUtil redisUtil;
+    private final RedissonClient redissonClient;
     @Resource
     private UserState userState;
 
-    private static final String TOKEN_VALUE = "idempotent-token-value";
-    private static final String TOKEN_PREFIX_KEY = "idempotent:token:";
-    private static final int TOKEN_EXPIRED_TIME = 180;
 
     @Override
-    protected IdempotentParam buildWrapper(JoinPoint joinPoint) {
-        return new IdempotentParam();
+    protected IdempotentParam buildWrapper(ProceedingJoinPoint joinPoint) {
+        String lockKey = String.format("idempotent:token:%s", userState.getCurrentToken());
+        return IdempotentParam.builder().lockKey(lockKey).build();
     }
 
     @Override
-    public void handler(IdempotentParam wrapper) {
-        String token = userState.getCurrentToken();
-        Boolean tokenFlag = redisUtil.setIfAbsent(TOKEN_PREFIX_KEY+token, TOKEN_VALUE,TOKEN_EXPIRED_TIME, TimeUnit.SECONDS);
-        if (!tokenFlag) {
-            String errMsg = wrapper.getIdempotent().message();
+    public void handler(IdempotentParam param) {
+        String lockKey = param.getLockKey();
+        RLock lock = redissonClient.getLock(lockKey);
+        if (!lock.tryLock()) {
+            String errMsg = param.getIdempotent().message();
             throw new IdempotentException(errMsg);
+        }
+        ContextHolder.put(lockKey, lock);
+    }
+
+    @Override
+    public void postProcess(IdempotentParam param) {
+        RLock lock = null;
+        String lockKey = param.getLockKey();
+        try {
+            lock = (RLock) ContextHolder.getKey(lockKey);
+        } finally {
+            if (lock != null) {
+                lock.unlock();
+            }
         }
     }
 }

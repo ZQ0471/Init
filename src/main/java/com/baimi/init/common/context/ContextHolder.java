@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,14 +15,38 @@ import java.util.Map;
  * @since 2024/8/7 下午3:26
  */
 @Component
-public class ApplicationContextHolder implements ApplicationContextAware {
+public class ContextHolder implements ApplicationContextAware {
 
     private static ApplicationContext CONTEXT;
+    private static ThreadLocal<Map<String, Object>> LOCAL = new ThreadLocal<>();
 
-
+    public static Map<String, Object> get() {
+        return LOCAL.get();
+    }
+    public static Object getKey(String key) {
+        Map<String, Object> context = get();
+        if (context.isEmpty()) return null;
+        return context.get(key);
+    }
+    public static void put(String key, Object val) {
+        Map<String, Object> context = get();
+        if (context==null) {
+            context = new HashMap<>();
+        }
+        context.put(key, val);
+        putContext(context);
+    }
+    public static void putContext(Map<String, Object> context) {
+        Map<String, Object> threadContext = LOCAL.get();
+        if (threadContext!=null) {
+            threadContext.putAll(context);
+            return;
+        }
+        LOCAL.set(context);
+    }
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        if ( ApplicationContextHolder.CONTEXT == null) {
-            ApplicationContextHolder.CONTEXT = applicationContext;
+        if ( ContextHolder.CONTEXT == null) {
+            ContextHolder.CONTEXT = applicationContext;
         }
     }
 

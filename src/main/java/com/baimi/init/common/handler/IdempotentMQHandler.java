@@ -2,20 +2,21 @@ package com.baimi.init.common.handler;
 
 import com.baimi.init.common.annotation.Idempotent;
 import com.baimi.init.common.aspect.IdempotentAspect;
-import com.baimi.init.common.enums.MQStatusEnum;
-import com.baimi.init.common.exception.MQRepeatException;
+import com.baimi.init.common.context.ContextHolder;
+import com.baimi.init.common.exception.IdempotentException;
 import com.baimi.init.common.idempotent.IdempotentParam;
 import com.baimi.init.common.idempotent.IdempotentSpELService;
 import com.baimi.init.common.idempotent.IdempotentTemplate;
-import com.baimi.init.common.utils.RedisUtil;
 import com.baimi.init.common.utils.SpELUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 
-import java.util.concurrent.TimeUnit;
+import javax.annotation.Resource;
 
 /**
  * @author zhang
@@ -26,26 +27,39 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public final class IdempotentMQHandler extends IdempotentTemplate implements IdempotentSpELService {
 
-    private final RedisUtil redisUtil;
-    private final static int TIMEOUT = 600;
-    private final static String WRAPPER = "wrapper:spEL:MQ";
+    @Resource
+    private RedissonClient redissonClient;
+
 
     @SneakyThrows
     @Override
-    protected IdempotentParam buildWrapper(JoinPoint joinPoint) {
+    protected IdempotentParam buildWrapper(ProceedingJoinPoint joinPoint) {
         Idempotent idempotent = IdempotentAspect.getIdempotent(joinPoint);
         String key = (String) SpELUtil.parseKey(idempotent.key(), ((MethodSignature) joinPoint.getSignature()).getMethod(), joinPoint.getArgs());
         return IdempotentParam.builder().lockKey(key).build();
     }
 
     @Override
-    public void handler(IdempotentParam wrapper) {
-        String uniqueKey = wrapper.getIdempotent().uniqueKeyPrefix() + wrapper.getLockKey();
-        Boolean setIfAbsent = redisUtil.setIfAbsent(uniqueKey, MQStatusEnum.CONSUMING.getCode(), TIMEOUT, TimeUnit.SECONDS);
-        if (setIfAbsent != null && !setIfAbsent) {
-            String consumeStatus = (String) redisUtil.get(uniqueKey);
-            boolean error = MQStatusEnum.isError(consumeStatus);
-            if(!error) throw new MQRepeatException(wrapper.getIdempotent().message());
+    public void handler(IdempotentParam param) {
+        String lockKey = param.getIdempotent().uniqueKeyPrefix() + param.getLockKey();
+        RLock lock = redissonClient.getLock(lockKey);
+        if (!lock.tryLock()) {
+            String errMsg = param.getIdempotent().message();
+            throw new IdempotentException(errMsg);
+        }
+        ContextHolder.put(lockKey, lock);
+    }
+
+    @Override
+    public void postProcess(IdempotentParam param) {
+        RLock lock = null;
+        String lockKey = param.getIdempotent().uniqueKeyPrefix() + param.getLockKey();
+        try {
+            lock = (RLock) ContextHolder.getKey(lockKey);
+        } finally {
+            if (lock != null) {
+                lock.unlock();
+            }
         }
     }
 }
