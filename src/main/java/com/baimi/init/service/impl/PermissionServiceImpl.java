@@ -1,9 +1,9 @@
 package com.baimi.init.service.impl;
 
 import com.baimi.init.common.Asserts;
+import com.baimi.init.dto.PageQuery;
 import com.baimi.init.entity.Permission;
 import com.baimi.init.mapper.PermissionMapper;
-import com.baimi.init.dto.PageQuery;
 import com.baimi.init.service.IPermissionService;
 import com.baimi.init.vo.PermissionVO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

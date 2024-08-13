@@ -1,8 +1,8 @@
 package com.baimi.init.service;
 
 import com.baimi.init.dto.UserInfo;
-import com.baimi.init.entity.User;
 import com.baimi.init.dto.UserQuery;
+import com.baimi.init.entity.User;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
