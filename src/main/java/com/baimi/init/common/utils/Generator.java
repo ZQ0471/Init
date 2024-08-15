@@ -10,9 +10,9 @@ import java.util.Collections;
 
 public class Generator {
     private static final String outPutDir = "E:\\code\\tempFiles";
-    private static final String tables = "admin_account,admin_role,admin_permission,admin_role_permission,material,category";
+    private static final String tables = "file";
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql:///material", "root", "123456")
+        FastAutoGenerator.create("jdbc:mysql:///demo", "root", "123456")
                 .globalConfig(builder -> {
                     builder.author("zhangqi").outputDir(outPutDir); // 指定输出目录
                 })

@@ -74,4 +74,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return this.page(page,wrapper);
     }
 
+    @Override
+    public void asyncMethod() {
+        try {
+            // 等待20秒
+            System.out.println("开始等待...");
+            Thread.sleep(20000); // 参数是毫秒，所以20000毫秒等于20秒
+            System.out.println("等待结束。");
+            // 这里可以继续执行其他操作
+        } catch (InterruptedException e) {
+            // 处理中断异常
+            Thread.currentThread().interrupt(); // 重置中断状态
+            System.err.println("线程被中断：" + e.getMessage());
+        }
+    }
+
 }
