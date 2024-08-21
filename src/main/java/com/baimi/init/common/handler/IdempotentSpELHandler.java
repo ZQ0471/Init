@@ -46,6 +46,7 @@ public final class IdempotentSpELHandler extends IdempotentTemplate implements I
         if (!lock.tryLock()) {
             throw new IdempotentException(param.getIdempotent().message());
         }
+        //todo:修改获取并修改记录
         ContextHolder.put(lockKey, lock);
     }
 

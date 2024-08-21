@@ -51,6 +51,7 @@ public final class IdempotentParamHandler extends IdempotentTemplate implements 
         if (!lock.tryLock()) {
             throw new IdempotentException(param.getIdempotent().message());
         }
+        //todo:获取并修改操作记录
         ContextHolder.put(lockKey, lock);
     }
 

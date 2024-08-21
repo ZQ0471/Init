@@ -43,6 +43,7 @@ public final class IdempotentTokenHandler extends IdempotentTemplate implements 
             String errMsg = param.getIdempotent().message();
             throw new IdempotentException(errMsg);
         }
+        //todo:获取并修改信息
         ContextHolder.put(lockKey, lock);
     }
 

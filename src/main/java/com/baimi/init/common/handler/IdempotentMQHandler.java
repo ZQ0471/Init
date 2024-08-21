@@ -47,6 +47,7 @@ public final class IdempotentMQHandler extends IdempotentTemplate implements Ide
             String errMsg = param.getIdempotent().message();
             throw new IdempotentException(errMsg);
         }
+        //todo:获取并修改记录信息
         ContextHolder.put(lockKey, lock);
     }
 
