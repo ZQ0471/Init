@@ -77,6 +77,12 @@
             <artifactId>sa-token-redis-jackson</artifactId>
             <version>1.38.0</version>
         </dependency>
+        <!--Jwt-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.12.3</version>
+        </dependency>
         <!--FastJson-->
         <dependency>
             <groupId>com.alibaba</groupId>
