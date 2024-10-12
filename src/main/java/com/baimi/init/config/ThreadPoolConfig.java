@@ -71,10 +71,9 @@ public class ThreadPoolConfig implements AsyncConfigurer, SchedulingConfigurer {
     public ScheduledExecutorService scheduledExecutorService() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(8);
-        scheduler.setThreadNamePrefix("drwash_scheduled");
+        scheduler.setThreadNamePrefix("rush_scheduled");
         scheduler.setErrorHandler(Throwable::printStackTrace);
         scheduler.initialize();
-
         return scheduler.getScheduledExecutor();
     }
 }
